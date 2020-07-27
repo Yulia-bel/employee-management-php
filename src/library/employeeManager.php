@@ -6,6 +6,8 @@
  * @date: 11/06/2020
  */
 
+ session_start();
+
 function addEmployee(array $newEmployee)
 {
 // TODO implement it
@@ -21,12 +23,43 @@ function deleteEmployee(string $id)
 function updateEmployee(array $updateEmployee)
 {
 // TODO implement it
+    $employees = json_decode(file_get_contents(__DIR__.'/../../resources/employees.json'));
+
+    foreach($employees as $employee) {
+        if ($employee->id == $updateEmployee['id']) {
+
+            $key = array_search($employee, $employees);
+            
+            $object = json_decode(json_encode($updateEmployee), FALSE);
+
+            $employees[$key] = $object;
+
+            file_put_contents(__DIR__.'/../../resources/employees.json', json_encode($employees));
+
+            echo "<script type='text/javascript'>alert('changes saved');</script>";
+
+            
+            
+        }
+    }
+
 }
 
 
 function getEmployee(string $id)
 {
 // TODO implement it
+    $requiredEmployee = null;
+
+    $employees = json_decode(file_get_contents(__DIR__.'/../../resources/employees.json'));
+    foreach($employees as $employee) {
+        if ($employee->id == $id) {
+            $requiredEmployee = $employee;
+            $_SESSION['employeeId'] = $employee->id;
+            break;
+        }
+    }
+    return $requiredEmployee;
 }
 
 

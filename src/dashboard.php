@@ -9,15 +9,25 @@ if(!isset($_SESSION["userId"])) {
     header('Location: ../index.php');
 }
 
+if(isset($_GET['user_changed'])) {
+    $changed = $_GET['user_changed'];
+  }
+
 ?>
 
     <body>
-<?php
-include "../assets/header.html";
-?>
+        <script>
+            if(<?= $changed ?> == true) {
+                alert("Changes to user saved!");
+            }
+        </script>
+
+    <?php
+    include "../assets/header.html";
+    ?>
         <div class="table-container">
         <?php 
-            echo $_SESSION["startTime"];
+            echo $_SESSION["startTime"];     
         ?>
             <table class="table">
                 <thead>
@@ -31,44 +41,14 @@ include "../assets/header.html";
                         <th scope="col">State</th>
                         <th scope="col">Postal Code</th>
                         <th scope="col">Phone number</th>
-                        <th scope="col"><i class="fas fa-plus"></i></th>
+                        <th scope="col"><i class="fas fa-plus" id="add-employee"></i></th>
                     </tr>
                 </thead>
                 <tbody id="employee-row-info">
                 </tbody>
             </table>
         <div>
-    <script>
-
-    $.ajax({
-        method: 'POST',
-        url: 'library/employeeController.php',
-        data: {
-            action: "select"
-        },
-        success: function(data){
-
-            let user = JSON.parse(data);
-            console.log(user);
-            for(let i = 0; i < user.length; i++){
-                $('#employee-row-info').append(
-                '<tr>'
-                + '<th scope="row"></th>'
-                + '<td>' + user[i].name + '</td>'
-                + '<td>' + user[i].email + '</td>'
-                + '<td>' + user[i].age + '</td>'
-                + '<td>' + user[i].streetAddress + '</td>'
-                + '<td>' + user[i].city + '</td>'
-                + '<td>' + user[i].state + ' </td>'
-                + '<td>' + user[i].postalCode + '</td>'
-                + '<td>' + user[i].phoneNumber + ' </td>'
-                + '<td><i class="fas fa-trash-alt"></i></td>'
-                + '</tr>'
-                )
-            }
-        }
-    })
-    </script>
+    
     <script src="../assets/login.js"></script>
     </body>
 </html>

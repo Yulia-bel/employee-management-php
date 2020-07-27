@@ -60,26 +60,8 @@ $(document).ready(function() {
               
               let employeeId = user[i].id;
 
+              //On click event cjanges the URI part of url so that we can later acces it with $_GET['employee_id'] on employee.php page (for example employee.php?employee_id=1)
               window.location.replace(`employee.php?employee_id=${employeeId}`)
-
-
-              /*$.get('library/employeeController.php', {action: "show", id: employeeId}, function(data) {
-                
-                let employee = JSON.parse(data);
-                console.log(employee)
-                $("#emName").val(employee.name);
-                $("#emLname").val(employee.lastName);
-                $("#emEmail").val(`${employee.email}`);
-                $("#emGender").val(`${employee.gender}`);
-                $("#emCity").val(`${employee.city}`);
-                $("#emStreet").val(`${employee.streetAddress}`);
-                $("#emState").val(`${employee.state}`);
-                $("#emAge").val(`${employee.age}`);
-                $("#emPostal").val(`${employee.postalCode}`);
-                $("#emPhone").val(`${employee.phoneNumber}`);
-               
-
-              })*/
             })
         }
     }

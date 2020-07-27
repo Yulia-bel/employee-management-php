@@ -9,12 +9,19 @@ if(!isset($_SESSION["userId"])) {
     header('Location: ../index.php');
 }
 
+//Saving employee id previousle passed through url in js on click event (login.js, line 64)
+
 $employeeId = $_GET['employee_id'];
 
 if(!isset($_GET['employee_id'])) {
   exit('Id required');
 }
+
+// using the function from employeeManager.php directly here - in $employee we save the object of the employee found by employeeManager by id of employee
+
 $employee = getEmployee($_GET["employee_id"]);
+
+/* the properties of $employee we put directly in form as value using the syntax: value='<?= $employee->name ?>'*/
 ?>
 
     <body>

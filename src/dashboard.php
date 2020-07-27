@@ -11,16 +11,13 @@ if(!isset($_SESSION["userId"])) {
 
 if(isset($_GET['user_changed'])) {
     $changed = $_GET['user_changed'];
+    echo "<script type='text/javascript'>alert('Changes saved!');</script>";
   }
 
 ?>
 
     <body>
-        <script>
-            if(<?= $changed ?> == true) {
-                alert("Changes to user saved!");
-            }
-        </script>
+       
 
     <?php
     include "../assets/header.html";

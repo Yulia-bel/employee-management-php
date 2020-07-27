@@ -1,5 +1,4 @@
 <?php
-
   require 'loginManager.php';
 
   if (isset($_POST["email"])) {

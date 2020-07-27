@@ -10,6 +10,7 @@ $(document).ready(function() {
       url: "src/library/loginController.php",
       data: {email:email, password:password },
       success: (data) => {
+        console.log(data)
         if (data == "true" ) {
           window.location.replace("src/dashboard.php");
         } else {
@@ -22,9 +23,11 @@ $(document).ready(function() {
     })
   })
 
+  $("#logout").on("click", function() {
+    $.get("../src/library/sessionHelper.php", {action: "logout"}, function(data){
 
-
-
-
+      if (data == "success") window.location.replace("../index.php");
+    })
+  })
 
 }) 

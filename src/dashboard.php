@@ -3,6 +3,12 @@
 <html>
 <?php 
 include "../assets/head.html";
+session_start();
+
+if(!isset($_SESSION["userId"])) {
+    header('Location: ../index.php');
+}
+
 ?>
 
     <body>
@@ -10,6 +16,9 @@ include "../assets/head.html";
 include "../assets/header.html";
 ?>
         <div class="table-container">
+        <?php 
+            echo $_SESSION["startTime"];
+        ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -60,5 +69,6 @@ include "../assets/header.html";
         }
     })
     </script>
+    <script src="../assets/login.js"></script>
     </body>
 </html>

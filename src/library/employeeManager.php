@@ -11,10 +11,14 @@
 function addEmployee(array $newEmployee)
 {
 // TODO implement it
+
+$users = json_decode(file_get_contents('../../resources/employees.json'));
+array_unshift($users, $newEmployee);
+file_put_contents('../../resources/employees.json', json_encode($users));
 }
 
 
-function deleteEmployee(string $id)
+function deleteEmployee(string $email)
 {
 // TODO implement it
 
@@ -43,6 +47,8 @@ function deleteEmployee(string $id)
             }
     }
     
+
+
 }
 
 

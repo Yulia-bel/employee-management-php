@@ -67,6 +67,21 @@ include "../assets/header.html";
         }
     }
 )
+   $('#add-employee').click(function(){
+    $('#employee-row-info').prepend('<tr id="toggle">'
+                + '<th scope="row"></th>'
+                + '<td><input id="new-name"></td>'
+                + '<td><input id="new-email"></td>'
+                + '<td><input class="input-short" id="new-age"></td>'
+                + '<td><input class="input-short" id="new-street"></td>'
+                + '<td><input id="new-city"></td>'
+                + '<td><input class="input-short" id="new-state"></td>'
+                + '<td><input id="new-postal"></td>'
+                + '<td><input id="new-phone"></td>'
+                + '<td><i class="fas fa-plus text-success" id="new-user-save"></i></td>'
+                + '</tr>')
+
+        })
 }
 
     </script>

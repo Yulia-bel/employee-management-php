@@ -81,6 +81,19 @@ include "../assets/header.html";
                 + '<td><i class="fas fa-plus text-success" id="new-user-save"></i></td>'
                 + '</tr>')
 
+
+                $("#new-user-save").on("click", function() {
+                    let newName = $('#new-name').val();
+                    let newEmail = $('#new-email').val();
+                    let newAge = $('#new-age').val();
+                    let newStreet = $('#new-street').val();
+                    let newCity = $('#new-city').val();
+                    let newState = $('#new-state').val();
+                    let newPostal = $('#new-postal').val();
+                    let newPhone = $('#new-phone').val();
+                    $('#toggle').remove();
+
+            })
         })
 }
 

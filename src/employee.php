@@ -9,7 +9,7 @@ if(!isset($_SESSION["userId"])) {
     header('Location: ../index.php');
 }
 
-//Saving employee id previousle passed through url in js on click event (login.js, line 64)
+//Saving employee id previously passed through url in js on click event (login.js, line 64)
 
 $employeeId = $_GET['employee_id'];
 
@@ -22,6 +22,17 @@ if(!isset($_GET['employee_id'])) {
 $employee = getEmployee($_GET["employee_id"]);
 
 /* the properties of $employee we put directly in form as value using the syntax: value='<?= $employee->name ?>'*/
+
+$now = (new \DateTime())->format('U');
+
+  $timeDifference = $now - $_SESSION["startTime"];
+
+  if($timeDifference > 5) {
+    $_SESSION = array();
+    session_destroy();
+    header("Location: ../index.php?logout=$timeDifference");
+  }
+
 ?>
 
     <body>

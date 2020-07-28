@@ -14,6 +14,18 @@ if(isset($_GET['user_changed'])) {
     echo "<script type='text/javascript'>alert('Changes saved!');</script>";
   }
 
+  
+  $now = (new \DateTime())->format('U');
+
+  $timeDifference = $now - $_SESSION["startTime"];
+
+  if($timeDifference > 5) {
+    $_SESSION = array();
+    session_destroy();
+    header("Location: ../index.php?logout=$timeDifference");
+  }
+
+
 ?>
 
     <body>
@@ -24,7 +36,9 @@ if(isset($_GET['user_changed'])) {
     ?>
         <div class="table-container">
         <?php 
-            echo $_SESSION["startTime"];     
+            echo $_SESSION["startTime"]; 
+            echo "<br>";
+            echo $timeDifference;    
         ?>
             <table class="table">
                 <thead>

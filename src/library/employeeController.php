@@ -3,6 +3,7 @@
 require "employeeManager.php";
 
 
+
 if(isset($_POST['action'])) {
     if($_POST['action'] == "select"){
         getEmployees();
@@ -45,9 +46,16 @@ if(isset($_POST['emName']))  {
 
 
 if(isset($_POST['deleteId'])) {
-    echo "foobar";
+
     $result = deleteEmployee($_POST['deleteId']);
-    //echo $result;
+
+    if($result == "expired") {
+        $_SESSION = array();
+        session_destroy();
+    }
+
 }
+
+
 
 ?>

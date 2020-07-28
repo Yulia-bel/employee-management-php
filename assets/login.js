@@ -62,6 +62,7 @@ $(document).ready(function() {
 
               //On click event cjanges the URI part of url so that we can later acces it with $_GET['employee_id'] on employee.php page (for example employee.php?employee_id=1)
               window.location.replace(`employee.php?employee_id=${employeeId}`)
+
             })
 
             $(`i[data-del='${user[i].id}']`).on("click", function (event) {
@@ -73,9 +74,11 @@ $(document).ready(function() {
                 $.ajax({
                   method: "POST",
                   url: "library/employeeController.php",
-                  data: {deleteId: employeeId},
+                  data: {action: "delete", deleteId: employeeId},
                   success: function (data) {
-                    console.log(data)
+                    if(data == "expired") {
+                      window.location.replace('../index.php?logout=true')
+                    }
                   }
                 })
                 

@@ -17,19 +17,32 @@ function addEmployee(array $newEmployee)
 function deleteEmployee(string $id)
 {
 // TODO implement it
-    $employees = json_decode(file_get_contents(__DIR__.'/../../resources/employees.json'));
-    
-    foreach ($employees as $employee) {
+
+    $now = (new \DateTime())->format('U');
+
+    $timeDifference = $now - $_SESSION["startTime"];
+
+    if($timeDifference > 5) {
+        echo "expired";
+    } else {
+        $employees = json_decode(file_get_contents(__DIR__.'/../../resources/employees.json'));
         
-        if($employee->id == $id) {
-            $index = array_search($employee, $employees);
-            array_splice($employees, $index, 1);
+        foreach ($employees as $employee) {
+            
+            if($employee->id == $id) {
 
-            file_put_contents(__DIR__.'/../../resources/employees.json', json_encode($employees));
+                $index = array_search($employee, $employees);
 
-            echo "User with id $employee->id removed";
-        }
+            
+                array_splice($employees, $index, 1);
+
+                file_put_contents(__DIR__.'/../../resources/employees.json', json_encode($employees));
+
+                echo "User with id $employee->id removed";
+                }
+            }
     }
+    
 }
 
 

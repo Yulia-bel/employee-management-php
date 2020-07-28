@@ -1,6 +1,13 @@
 <!-- TODO Application entry point. Login view -->
 
 <html lang="en">
+
+<?php 
+  if(isset($_GET['logout'])) {
+    
+    echo "<script type='text/javascript'>alert('Your session expired!');</script>";
+  }
+?>
   
   <head>
     <meta charset="UTF-8">

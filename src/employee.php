@@ -27,7 +27,7 @@ $now = (new \DateTime())->format('U');
 
   $timeDifference = $now - $_SESSION["startTime"];
 
-  if($timeDifference > 5) {
+  if($timeDifference > 500) {
     $_SESSION = array();
     session_destroy();
     header("Location: ../index.php?logout=$timeDifference");

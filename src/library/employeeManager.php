@@ -18,7 +18,7 @@ file_put_contents('../../resources/employees.json', json_encode($users));
 }
 
 
-function deleteEmployee(string $email)
+function deleteEmployee(string $id)
 {
 // TODO implement it
 
@@ -26,7 +26,7 @@ function deleteEmployee(string $email)
 
     $timeDifference = $now - $_SESSION["startTime"];
 
-    if($timeDifference > 5) {
+    if($timeDifference > 500) {
         echo "expired";
     } else {
         $employees = json_decode(file_get_contents(__DIR__.'/../../resources/employees.json'));
@@ -34,15 +34,10 @@ function deleteEmployee(string $email)
         foreach ($employees as $employee) {
             
             if($employee->id == $id) {
-
                 $index = array_search($employee, $employees);
-
-            
                 array_splice($employees, $index, 1);
-
                 file_put_contents(__DIR__.'/../../resources/employees.json', json_encode($employees));
-
-                echo "User with id $employee->id removed";
+                echo "deleted";
                 }
             }
     }

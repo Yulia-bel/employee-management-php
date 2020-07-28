@@ -42,11 +42,10 @@ if(isset($_POST['deleteId'])) {
     if($result == "expired") {
         $_SESSION = array();
         session_destroy();
+        echo $result;
     }
 
 }
-
-
 
 
 if(isset($_POST['action'])){
@@ -64,7 +63,7 @@ if(isset($_POST['action'])){
         $newPhone = $_POST['phone'];
 
         // save other variables recieved from js
-        $newUserArray = array("id"=>"", "name"=>$newName, "lastName"=>"", "email"=>$newEmail, "gender"=>"","age"=>$newAge, "city"=>$newCity, "sreetAddress"=>$newStreet, "state"=>$newState, "postalCode"=>$newPostal, "phoneNumber"=>$newPhone);
+        $newUserArray = array("id"=>"", "name"=>$newName, "lastName"=>"", "email"=>$newEmail, "gender"=>"","age"=>$newAge, "city"=>$newCity, "streetAddress"=>$newStreet, "state"=>$newState, "postalCode"=>$newPostal, "phoneNumber"=>$newPhone);
 
         addEmployee($newUserArray);
     }

@@ -93,6 +93,14 @@ include "../assets/header.html";
                     let newPhone = $('#new-phone').val();
                     $('#toggle').remove();
 
+                    $.ajax({
+                    method: "POST",
+                    url: "../src/library/employeeController.php",
+                    data: {action:"addemployee",name: newName, email: newEmail, age: newAge, street: newStreet, city: newCity, state: newState, postal: newPostal, phone: newPhone}, 
+                    success: function() {
+                        printTable();
+                    }
+                })
             })
         })
 }

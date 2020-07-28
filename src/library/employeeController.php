@@ -42,4 +42,12 @@ if(isset($_POST['emName']))  {
     
 }
 
+
+
+if(isset($_POST['deleteId'])) {
+    echo "foobar";
+    $result = deleteEmployee($_POST['deleteId']);
+    //echo $result;
+}
+
 ?>

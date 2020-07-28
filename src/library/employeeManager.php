@@ -17,6 +17,19 @@ function addEmployee(array $newEmployee)
 function deleteEmployee(string $id)
 {
 // TODO implement it
+    $employees = json_decode(file_get_contents(__DIR__.'/../../resources/employees.json'));
+    
+    foreach ($employees as $employee) {
+        
+        if($employee->id == $id) {
+            $index = array_search($employee, $employees);
+            array_splice($employees, $index, 1);
+
+            file_put_contents(__DIR__.'/../../resources/employees.json', json_encode($employees));
+
+            echo "User with id $employee->id removed";
+        }
+    }
 }
 
 
@@ -34,12 +47,7 @@ function updateEmployee(array $updateEmployee)
 
             $employees[$key] = $object;
 
-            file_put_contents(__DIR__.'/../../resources/employees.json', json_encode($employees));
-
-            echo "<script type='text/javascript'>alert('changes saved');</script>";
-
-            
-            
+            file_put_contents(__DIR__.'/../../resources/employees.json', json_encode($employees));   
         }
     }
 

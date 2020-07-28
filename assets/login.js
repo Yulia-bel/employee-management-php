@@ -52,7 +52,7 @@ $(document).ready(function() {
             + '<td>' + user[i].state + ' </td>'
             + '<td>' + user[i].postalCode + '</td>'
             + '<td>' + user[i].phoneNumber + ' </td>'
-            + '<td><i class="fas fa-trash-alt"></i></td>'
+            + '<td><i class="fas fa-trash-alt" data-del="' + user[i].id + '"></i></td>'
             + '</tr>'
             )
 
@@ -62,6 +62,24 @@ $(document).ready(function() {
 
               //On click event cjanges the URI part of url so that we can later acces it with $_GET['employee_id'] on employee.php page (for example employee.php?employee_id=1)
               window.location.replace(`employee.php?employee_id=${employeeId}`)
+            })
+
+            $(`i[data-del='${user[i].id}']`).on("click", function (event) {
+              if (confirm(`Are you sure you want to delete ${user[i].name}?`)) {
+
+                let employeeId = $(event.target).attr('data-del');
+              
+
+                $.ajax({
+                  method: "POST",
+                  url: "library/employeeController.php",
+                  data: {deleteId: employeeId},
+                  success: function (data) {
+                    console.log(data)
+                  }
+                })
+                
+              }
             })
         }
     }

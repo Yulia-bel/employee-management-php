@@ -13,7 +13,7 @@ function addEmployee(array $newEmployee)
 // TODO implement it
 
 $users = json_decode(file_get_contents('../../resources/employees.json'));
-array_unshift($users, $newEmployee);
+array_push($users, $newEmployee);
 file_put_contents('../../resources/employees.json', json_encode($users));
 }
 

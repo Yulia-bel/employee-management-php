@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  let nextId = "";
+
   $("#login").on("click", function(e) {
     e.preventDefault()
     let email = $("#inputEmail").val();
@@ -48,6 +50,7 @@ $(document).ready(function() {
             employeesJsonObject = JSON.parse(data);
             console.log(employeesJsonObject);
             let maxRow = (employeesJsonObject.length > 10)?10:employeesJsonObject.length
+            nextId = employeesJsonObject[employeesJsonObject.length-1].id + 1;
             for(let i = 0; i < maxRow; i++){
                 $('#employee-row-info').append(
                 '<tr>'
@@ -115,12 +118,13 @@ $(document).ready(function() {
                     let newState = $('#new-state').val();
                     let newPostal = $('#new-postal').val();
                     let newPhone = $('#new-phone').val();
+                    let newId = nextId;
                     $('#toggle').remove();
 
                     $.ajax({
                     method: "POST",
                     url: "../src/library/employeeController.php",
-                    data: {action:"addemployee",name: newName, email: newEmail, age: newAge, street: newStreet, city: newCity, state: newState, postal: newPostal, phone: newPhone}, 
+                    data: {action:"addemployee", id : newId, name: newName, email: newEmail, age: newAge, street: newStreet, city: newCity, state: newState, postal: newPostal, phone: newPhone}, 
                     success: function() {
                         printTable();
                     }

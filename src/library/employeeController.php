@@ -33,8 +33,6 @@ if(isset($_POST['emName']))  {
     
 }
 
-
-
 if(isset($_POST['deleteId'])) {
 
     $result = deleteEmployee($_POST['deleteId']);
@@ -44,15 +42,16 @@ if(isset($_POST['deleteId'])) {
         session_destroy();
         echo $result;
     }
-
 }
-
 
 if(isset($_POST['action'])){
     if($_POST['action'] == "select"){
         getEmployees();
 
-    }    if($_POST['action']=="addemployee") {
+    }    
+    
+    if($_POST['action']=="addemployee") {
+        $newId = $_POST['id'];
         $newName = $_POST['name'];
         $newEmail = $_POST['email'];
         $newAge = $_POST['age'];
@@ -63,7 +62,7 @@ if(isset($_POST['action'])){
         $newPhone = $_POST['phone'];
 
         // save other variables recieved from js
-        $newUserArray = array("id"=>"", "name"=>$newName, "lastName"=>"", "email"=>$newEmail, "gender"=>"","age"=>$newAge, "city"=>$newCity, "streetAddress"=>$newStreet, "state"=>$newState, "postalCode"=>$newPostal, "phoneNumber"=>$newPhone);
+        $newUserArray = array("id"=>$newId, "name"=>$newName, "lastName"=>"", "email"=>$newEmail, "gender"=>"","age"=>$newAge, "city"=>$newCity, "streetAddress"=>$newStreet, "state"=>$newState, "postalCode"=>$newPostal, "phoneNumber"=>$newPhone);
 
         addEmployee($newUserArray);
     }

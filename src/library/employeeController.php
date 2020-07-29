@@ -26,7 +26,10 @@ if(isset($_POST['emName']))  {
         "city" => $_POST['emCity'], 
         "state" => $_POST['emState'], 
         "postalCode" => $_POST['emPostal'], 
-        "phoneNumber" => $_POST['emPhone']);
+        "phoneNumber" => $_POST['emPhone'],
+        "photo"=>$_POST['emPhoto']
+    );
+        
 
     updateEmployee($newUser);
     header("Location: ../dashboard.php?user_changed=true");

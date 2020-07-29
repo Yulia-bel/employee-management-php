@@ -41,9 +41,6 @@ function deleteEmployee(string $id)
                 }
             }
     }
-    
-
-
 }
 
 

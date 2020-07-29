@@ -39,8 +39,23 @@ $now = (new \DateTime())->format('U');
     <?php
     include "../assets/header.html";
     ?>
+
+    
+
       <div class="container">
         <form class="w-75 mt-5" method="POST" action="library/employeeController.php">
+
+        <div class="form-row mb-3">
+          <?php
+            if($employee->photo) echo "<img src='$employee->photo' alt='No avatar' width='300' height='300'>";
+          ?>
+            
+        </div>
+
+          <?php
+            include "imageGallery.php";
+          ?>
+
           <div class="form-row mb-3">
             <div class="col">
               <label for="emName" class="ml-2">First Name</label>
@@ -97,6 +112,7 @@ $now = (new \DateTime())->format('U');
               <label for="emPhone" class="ml-2">Phone Number</label> 
               <input type="text" class="form-control" name="emPhone" id="emPhone" placeholder="Phone Number" value="<?= $employee->phoneNumber ?>">
               <input type="text" class="form-control invisible" name="emId" id="emId" placeholder="Phone Number" value="<?= $employee->id ?>">
+              <input type="text" class="form-control invisible" name="emPhoto" id="emPhoto" placeholder="Phone Number" value="">
             </div>
           </div>
 

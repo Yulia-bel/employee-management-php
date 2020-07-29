@@ -8,3 +8,18 @@
 .input-short {
     width: 40px;
 }
+
+.selected-image {
+    width: 110px;
+    height: 110px;
+}
+
+.avatars-list {
+    list-style: none;
+}
+
+.avatars-list li {
+    display: inline;
+    margin-right: 10px;
+}
+

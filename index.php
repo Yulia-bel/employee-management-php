@@ -3,9 +3,14 @@
 <html lang="en">
 
 <?php 
+
+  session_start();
   if(isset($_GET['logout'])) {
-    
     echo "<script type='text/javascript'>alert('Your session expired!');</script>";
+  }
+
+  if(isset($_SESSION['userId'])) {
+    header('Location: src/dashboard.php');
   }
 ?>
   

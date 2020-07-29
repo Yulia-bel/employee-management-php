@@ -47,7 +47,8 @@ $now = (new \DateTime())->format('U');
 
         <div class="form-row mb-3">
           <?php
-            if($employee->photo) echo "<img src='$employee->photo' alt='No avatar' width='300' height='300'>";
+            if(property_exists($employee, "photo")) echo "<img src='$employee->photo' alt='No avatar' width='300' height='300'>";
+            else echo "No avatar chosen"
           ?>
             
         </div>
@@ -119,7 +120,7 @@ $now = (new \DateTime())->format('U');
           <div class="form-row mb-3">
             <div class="col">
               <input type="submit" class="btn btn-primary mr-4" id="emSave" value="Submit">
-              <input type="button" class="btn btn-primary" id="emReturn" value="Return">
+              <input type="button" class="btn btn-primary" id="emReturn" value="Return" onclick="location.href='dashboard.php'">
             </div>
           </div>
         </form>

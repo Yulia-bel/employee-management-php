@@ -15,18 +15,15 @@ if(isset($_GET['user_changed'])) {
     echo "<script type='text/javascript'>alert('Changes saved!');</script>";
   }
 
-  
-  $now = (new \DateTime())->format('U');
+ 
+$now = (new \DateTime())->format('U');
+$timeDifference = $now - $_SESSION["startTime"];
 
-  $timeDifference = $now - $_SESSION["startTime"];
-
-  if($timeDifference > 500) {
+if($timeDifference > 500) {
     $_SESSION = array();
     session_destroy();
     header("Location: ../index.php?logout=$timeDifference");
   }
-
-
 ?>
 
     <body>

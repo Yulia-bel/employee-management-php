@@ -127,5 +127,6 @@ $now = (new \DateTime())->format('U');
       </div>
          
       <script src="../assets/login.js"></script>
+      <script type="text/javascript" src="../node_modules/jsgrid/dist/jsgrid.min.js"></script>
     </body>
 </html>

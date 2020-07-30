@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-  let nextId = "";
-
   $("#login").on("click", function (e) {
     e.preventDefault()
     let email = $("#inputEmail").val();
@@ -37,119 +35,148 @@ $(document).ready(function () {
     })
   })
 
-  let employeesJsonObject;
-  printTable();
 
 
-  function printTable() {
-    $('#employee-row-info').html("");
-    $.ajax({
-      method: 'POST',
-      url: 'library/employeeController.php',
-      data: {
-        action: "select",
 
-      },
-      success: function (data) {
+  $.ajax({
+    method: 'POST',
+    url: 'library/employeeController.php',
+    data: {
+      action: "select",
 
-        employeesJsonObject = JSON.parse(data);
-        console.log(employeesJsonObject);
-        let maxRow = (employeesJsonObject.length > 10) ? 10 : employeesJsonObject.length
-        nextId = employeesJsonObject[employeesJsonObject.length - 1].id + 1;
-        for (let i = 0; i < maxRow; i++) {
-          $('#employee-row-info').append(
-            '<tr>' +
-            '<th scope="row"></th>' +
-            '<td id="' + employeesJsonObject[i].id + '">' + employeesJsonObject[i].name + '</td>' +
-            '<td>' + employeesJsonObject[i].email + '</td>' +
-            '<td>' + employeesJsonObject[i].age + '</td>' +
-            '<td>' + employeesJsonObject[i].streetAddress + '</td>' +
-            '<td>' + employeesJsonObject[i].city + '</td>' +
-            '<td>' + employeesJsonObject[i].state + ' </td>' +
-            '<td>' + employeesJsonObject[i].postalCode + '</td>' +
-            '<td>' + employeesJsonObject[i].phoneNumber + ' </td>' +
-            '<td><i class="fas fa-trash-alt" data-del="' + employeesJsonObject[i].id + '"></i></td>' +
-            '</tr>')
+    },
+    success: function (data) {
 
-          $(`#${employeesJsonObject[i].id}`).on("click", function () {
-            let employeeId = employeesJsonObject[i].id;
-            //On click event cjanges the URI part of url so that we can later acces it with $_GET['employee_id'] on employee.php page (for example employee.php?employee_id=1)
-            window.location.replace(`employee.php?employee_id=${employeeId}`)
-          })
+      let employees = JSON.parse(data)
 
-          $(`i[data-del='${employeesJsonObject[i].id}']`).on("click", function (event) {
-            if (confirm(`Are you sure you want to delete ${employeesJsonObject[i].name}?`)) {
-              let employeeId = $(event.target).attr('data-del');
-
-              $.ajax({
-                method: "DELETE",
-                url: "library/employeeController.php",
-                data: {
-                  deleteId: employeeId
-                },
-                success: function (data) {
-                  console.log(data)
-                  if (data == "expired") {
-                    window.location.replace(`../index.php?logout=true`)
-                  } else {
-                    printTable();
-                  }
-                }
-              })
-            }
-          })
-        }
-      }
-    })
-    $('#add-employee').click(function () {
-      $('#employee-row-info').prepend('<tr id="toggle">' +
-        '<th scope="row"></th>' +
-        '<td><input id="new-name"></td>' +
-        '<td><input id="new-email"></td>' +
-        '<td><input class="input-short" id="new-age"></td>' +
-        '<td><input class="input-short" id="new-street"></td>' +
-        '<td><input id="new-city"></td>' +
-        '<td><input class="input-short" id="new-state"></td>' +
-        '<td><input id="new-postal"></td>' +
-        '<td><input id="new-phone"></td>' +
-        '<td><i class="fas fa-plus text-success" id="new-user-save"></i></td>' +
-        '</tr>')
-
-
-      $("#new-user-save").on("click", function () {
-        let newName = $('#new-name').val();
-        let newEmail = $('#new-email').val();
-        let newAge = $('#new-age').val();
-        let newStreet = $('#new-street').val();
-        let newCity = $('#new-city').val();
-        let newState = $('#new-state').val();
-        let newPostal = $('#new-postal').val();
-        let newPhone = $('#new-phone').val();
-        let newId = nextId;
-        $('#toggle').remove();
-
-        $.ajax({
-          method: "POST",
-          url: "../src/library/employeeController.php",
-          data: {
-            action: "addemployee",
-            id: newId,
-            name: newName,
-            email: newEmail,
-            age: newAge,
-            street: newStreet,
-            city: newCity,
-            state: newState,
-            postal: newPostal,
-            phone: newPhone
+      $("#jsGrid").jsGrid({
+        height: "auto",
+        width: "100%",
+        filtering: false,
+        inserting: true,
+        editing: false,
+        sorting: true,
+        paging: true,
+        autoload: true,
+        pageSize: 10,
+        pageButtonCount: 5,
+        deleteConfirm: "Do you really want to delete this employee?",
+        controller: {
+          insertItem: function (newEmployee) {
+            console.log(newEmployee)
+            return $.ajax({
+              type: "POST",
+              url: "http://localhost/php-employee-management-v1/src/library/employeeController.php",
+              data: {
+                action: "addemployee",
+                newEmployee: newEmployee
+              }
+            }).done(function (response) {
+              console.log(response)
+              //alert("Employee named " + newEmployee.name + " inserted successfully!");
+            });
           },
-          success: function () {
-            printTable();
+          deleteItem: function (employee) {
+            return $.ajax({
+              type: "DELETE",
+              url: "http://localhost/php-employee-management-v1/src/library/employeeController.php",
+              data: {
+                "deleteId": employee.id
+              },
+            }).done(function (response) {
+              alert(response);
+            });
           }
-        })
-      })
-    })
-  }
+        },
+        rowClick: function (row) {
+            window.location.replace(`http://localhost/php-employee-management-v1/src/employee.php?employee_id=${row.item.id}`);
+          
+        },
+        onItemInserting: function(args) {
+          if(args.item.id === undefined) {
+            $.ajax({
+              url: "http://localhost/php-employee-management-v1/src/library/employeeController.php",
+              method: "POST",
+              data: {action: "getId"},
+              success: function(data) {
+                console.log(data)
+                args.item.id = data
+              }
+            })
+          }
+        },
+
+        data: employees,
+
+        fields: [{
+            name: "id",
+            title: "Id",
+            visible: false,
+            width: 0
+          },
+          {
+            name: "name",
+            title: "Name",
+            type: "text",
+            width: 100
+          },
+          {
+            name: "email",
+            title: "Email",
+            type: "text",
+            width: 200
+          },
+          {
+            name: "age",
+            title: "Age",
+            type: "number",
+            width: 75
+          },
+          {
+            name: "streetAddress",
+            title: "Street No.",
+            type: "text",
+            width: 100
+          },
+          {
+            name: "city",
+            title: "City",
+            type: "text",
+            width: 120
+          },
+          {
+            name: "state",
+            title: "State",
+            type: "text",
+            width: 70
+          },
+          {
+            name: "postalCode",
+            title: "Postal Code",
+            type: "text",
+            width: 100
+          },
+          {
+            name: "phoneNumber",
+            title: "Phone Number",
+            type: "text",
+            width: 140
+          },
+          {
+            type: "control",
+            editButton: false,
+            width: 50
+          }
+        ]
+      });
+
+
+
+
+    }
+  })
+
+
 
 
 

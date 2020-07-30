@@ -96,6 +96,11 @@ function getQueryStringParameters(): array
 function getNextIdentifier(array $employeesCollection): int
 {
 // TODO implement it
+    
+    $lastIndex = count($employeesCollection) - 1;
+    $newId = $employeesCollection[$lastIndex]->id + 1;
+    $newIdInt = (int)$newId;
+    return $newIdInt;
 }
 
 //My functions 

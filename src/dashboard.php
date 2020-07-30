@@ -27,38 +27,22 @@ if($timeDifference > 500) {
 ?>
 
     <body>
-       
-
-    <?php
-    include "../assets/header.html";
-    ?>
-        <div class="table-container">
         <?php 
+             include "../assets/header.html";
             echo $_SESSION["startTime"]; 
             echo "<br>";
             echo $timeDifference;    
         ?>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Street No.</th>
-                        <th scope="col">City</th>
-                        <th scope="col">State</th>
-                        <th scope="col">Postal Code</th>
-                        <th scope="col">Phone number</th>
-                        <th scope="col"><i id="add-employee" class="fas fa-plus text-success"></i></th>
-                    </tr>
-                </thead>
-                <tbody id="employee-row-info">
-                </tbody>
-            </table>
-        <div>
+       
+       <div class="container-main py-5 px-4 px-md-5 container-fluid">
+
+        <div id="jsGrid"></div>
+
+        </div>
+
     
     <script src="../assets/login.js"></script>
+    <script type="text/javascript" src="../node_modules/jsgrid/dist/jsgrid.min.js"></script>
     
     </body>
 </html>

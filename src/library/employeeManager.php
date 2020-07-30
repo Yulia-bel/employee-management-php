@@ -40,8 +40,8 @@ function deleteEmployee(string $id)
                 echo "deleted";
                 }
             }
+        }
     }
-}
 
 
 function updateEmployee(array $updateEmployee)
@@ -108,5 +108,4 @@ function getNextIdentifier(array $employeesCollection): int
 function getEmployees(){
     $jsonFile = file_get_contents('../../resources/employees.json');
     echo $jsonFile;
-
 }

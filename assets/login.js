@@ -27,11 +27,11 @@ $(document).ready(function () {
   })
 
   $("#logout").on("click", function () {
-    $.get("../src/library/sessionHelper.php", {
+    $.get("http://localhost/php-employee-management-v1/src/library/sessionHelper.php", {
       action: "logout"
     }, function (data) {
 
-      if (data == "success") window.location.replace("../index.php");
+      if (data == "success") window.location.replace("http://localhost/php-employee-management-v1/index.php");
     })
   })
 
@@ -40,7 +40,7 @@ $(document).ready(function () {
 
   $.ajax({
     method: 'POST',
-    url: 'library/employeeController.php',
+    url: 'http://localhost/php-employee-management-v1/src/library/employeeController.php',
     data: {
       action: "select",
 

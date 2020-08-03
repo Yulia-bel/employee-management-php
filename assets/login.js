@@ -27,11 +27,11 @@ $(document).ready(function () {
   })
 
   $("#logout").on("click", function () {
-    $.get("http://localhost/php-employee-management-v1/src/library/sessionHelper.php", {
+    $.get("../src/library/sessionHelper.php", {
       action: "logout"
     }, function (data) {
 
-      if (data == "success") window.location.replace("http://localhost/php-employee-management-v1/index.php");
+      if (data == "success") window.location.replace("../index.php");
     })
   })
 
@@ -40,7 +40,7 @@ $(document).ready(function () {
 
   $.ajax({
     method: 'POST',
-    url: 'http://localhost/php-employee-management-v1/src/library/employeeController.php',
+    url: '../src/library/employeeController.php',
     data: {
       action: "select",
 
@@ -66,7 +66,7 @@ $(document).ready(function () {
             console.log(newEmployee)
             return $.ajax({
               type: "POST",
-              url: "http://localhost/php-employee-management-v1/src/library/employeeController.php",
+              url: "../src/library/employeeController.php",
               data: {
                 action: "addemployee",
                 newEmployee: newEmployee
@@ -79,7 +79,7 @@ $(document).ready(function () {
           deleteItem: function (employee) {
             return $.ajax({
               type: "DELETE",
-              url: "http://localhost/php-employee-management-v1/src/library/employeeController.php",
+              url: "../src/library/employeeController.php",
               data: {
                 "deleteId": employee.id
               },
@@ -89,13 +89,13 @@ $(document).ready(function () {
           }
         },
         rowClick: function (row) {
-          window.location.replace(`http://localhost/php-employee-management-v1/src/employee.php?employee_id=${row.item.id}`);
+          window.location.replace(`../src/employee.php?employee_id=${row.item.id}`);
 
         },
         onItemInserting: function (args) {
           if (args.item.id === undefined) {
             $.ajax({
-              url: "http://localhost/php-employee-management-v1/src/library/employeeController.php",
+              url: "../src/library/employeeController.php",
               method: "POST",
               data: {
                 action: "getId"

@@ -60,7 +60,7 @@ if (isset($_SESSION['userId'])) {
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="http://localhost/php-employee-management-v1/node_modules/jsgrid/dist/jsgrid.min.js"></script>
+  <script type="text/javascript" src="node_modules/jsgrid/dist/jsgrid.min.js"></script>
 
 </body>
 

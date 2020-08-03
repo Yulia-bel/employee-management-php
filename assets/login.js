@@ -2,14 +2,14 @@ $(document).ready(function () {
 
   $("#login").on("click", function (e) {
     e.preventDefault()
-    let email = $("#inputEmail").val();
+    let username = $("#inputName").val();
     let password = $("#inputPassword").val();
 
     $.ajax({
       method: "POST",
       url: "src/library/loginController.php",
       data: {
-        email: email,
+        name: username,
         password: password
       },
       success: (data) => {
@@ -89,16 +89,18 @@ $(document).ready(function () {
           }
         },
         rowClick: function (row) {
-            window.location.replace(`http://localhost/php-employee-management-v1/src/employee.php?employee_id=${row.item.id}`);
-          
+          window.location.replace(`http://localhost/php-employee-management-v1/src/employee.php?employee_id=${row.item.id}`);
+
         },
-        onItemInserting: function(args) {
-          if(args.item.id === undefined) {
+        onItemInserting: function (args) {
+          if (args.item.id === undefined) {
             $.ajax({
               url: "http://localhost/php-employee-management-v1/src/library/employeeController.php",
               method: "POST",
-              data: {action: "getId"},
-              success: function(data) {
+              data: {
+                action: "getId"
+              },
+              success: function (data) {
                 console.log(data)
                 args.item.id = data
               }

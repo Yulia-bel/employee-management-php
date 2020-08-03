@@ -1,13 +1,12 @@
 <?php
-  require 'loginManager.php';
+require 'loginManager.php';
 
-  if (isset($_POST["email"])) {
+if (isset($_POST["name"])) {
 
-    $output = checkEmail($_POST["email"], $_POST["password"]);
+  $output = checkUser($_POST["name"], $_POST["password"]);
 
-    if ($output == "true") {
-      session_start();
-
-    }
-    echo $output;
+  if ($output == "true") {
+    session_start();
   }
+  echo $output;
+}

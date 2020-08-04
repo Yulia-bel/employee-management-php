@@ -38,15 +38,13 @@ $(document).ready(function () {
 
 
   $.ajax({
-    method: 'POST',
-    url: 'controllers/employeeController.php',
-    data: {
-      action: "select",
+    method: 'GET',
+    url: "resources/employees.json",
 
-    },
     success: function (data) {
-
-      let employees = JSON.parse(data)
+      console.log(data);
+      // let employees = JSON.parse(data)
+      // console.log(employees);
 
       $("#jsGrid").jsGrid({
         height: "auto",
@@ -61,6 +59,9 @@ $(document).ready(function () {
         pageButtonCount: 5,
         deleteConfirm: "Do you really want to delete this employee?",
         controller: {
+          loadData: function () {
+            return $.ajax('library/employeeController.php');
+          },
           insertItem: function (newEmployee) {
             console.log(newEmployee)
             return $.ajax({
@@ -109,7 +110,7 @@ $(document).ready(function () {
           }
         },
 
-        data: employees,
+        data: data,
 
         fields: [{
             name: "id",

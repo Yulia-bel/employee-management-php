@@ -3,7 +3,7 @@
 require_once MODELS . "employeeManager.php";
 
 
-
+/*
 switch ($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
         if (isset($_GET['action'])) {
@@ -72,4 +72,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             }
         }
         break;
+}
+*/
+
+
+if (isset($_REQUEST['action']) && isset($_SESSION['userId'])) {
+    if (function_exists($_REQUEST['action'])) call_user_func($_REQUEST['action'], $_REQUEST);
 }

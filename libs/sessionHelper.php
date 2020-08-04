@@ -4,7 +4,7 @@ session_start();
 
 //We check if we try to do some action but session is not active
 if (!activeSession() && isset($_GET['action'])) header('Location: index.php');
-else if (sessionTimeout()) echo "Timed Out";
+else if (sessionTimeout()) logout();
 
 //if we logged out
 if (isset($_GET['logout'])) {
@@ -14,7 +14,7 @@ if (isset($_GET['logout'])) {
 
 //If session is active
 if (isset($_SESSION['userId'])) {
-  header('Location: ?controller=login&user=' . $_SESSION['userId']);
+  // header('Location: ?controller=login&action=loadDashboard');
 }
 
 

@@ -1,8 +1,6 @@
 <!-- TODO Application entry point. Login view -->
 <html lang="en">
 
-
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +39,7 @@
 
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">Sign in</button>
+              <button class="btn btn-lg btn-primary btn-block" type="button" id="login">Sign in</button>
 
             </form>
           </div>

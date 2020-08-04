@@ -13,11 +13,10 @@ $(document).ready(function () {
         password: password
       },
       success: (data) => {
-        console.log(data)
+        console.log(data);
         if (data == "true") {
           // location.replace("src/dashboard.php");
-          //TODO modify this replace -> check if the line beneath works as expected
-          location.href = `?controller=employee`;
+          location.href = `?controller=login&action=loadDashboard`;
         } else {
           $("#error_message").text(data);
           $("#error_message").addClass("text-danger mb-3");

@@ -5,13 +5,20 @@ if (isset($_POST["name"])) {
   $output = checkUser($_POST["name"], $_POST["password"]);
 
   if ($output == true) {
-    // session_start();
     unset($_POST["name"]);
     unset($_POST["password"]);
-    require_once VIEWS . "dashboard/dashboard.php";
+    echo "true";
   }
-} else if (isset($_GET['user'])) {
-  require_once VIEWS . "dashboard/dashboard.php";
-} else {
+}
+// else if (isset($_GET['user'])) {
+//   // require_once VIEWS . "dashboard/dashboard.php";
+//   loadDashboard();
+// } 
+else {
   require_once VIEWS . "login/login.php";
 }
+
+if (isset($_REQUEST['action'])) {
+  if (function_exists($_REQUEST['action'])) call_user_func($_REQUEST['action'], $_REQUEST);
+  else echo "Error: Function doesnt exist";
+} else echo "No action!";

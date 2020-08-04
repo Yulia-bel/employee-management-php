@@ -10,7 +10,6 @@ if (isset($_GET['controller'])) {
         require_once $controller;
     } else {
         $errorMsg = "The page you are trying to access does not exist.";
-        // require_once VIEWS . "error/error.php";
     }
 } else {
     require_once CONTROLLERS . "loginController.php";

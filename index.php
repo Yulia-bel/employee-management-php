@@ -1,6 +1,7 @@
 <?php
 
 include_once "config/constants.php";
+include_once "libs/sessionHelper.php";
 
 if (isset($_GET['controller'])) {
     $controller = getControllerPath($_GET['controller']);
@@ -9,10 +10,10 @@ if (isset($_GET['controller'])) {
         require_once $controller;
     } else {
         $errorMsg = "The page you are trying to access does not exist.";
-        require_once VIEWS . "error/error.php";
+        // require_once VIEWS . "error/error.php";
     }
 } else {
-    require_once VIEWS . "main/main.php";
+    require_once CONTROLLERS . "loginController.php";
 }
 
 function getControllerPath($controller): string

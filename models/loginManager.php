@@ -3,7 +3,8 @@
 function checkUser($username, $password)
 {
 
-  $users = json_decode(file_get_contents('../../resources/users.json'))->users;
+  $users = json_decode(file_get_contents(RESOURCES . 'users.json'))->users;
+  $found = false;
 
   foreach ($users as $user) {
 
@@ -12,14 +13,19 @@ function checkUser($username, $password)
 
         session_start();
         $_SESSION["userId"] = $user->userId;
-        $_SESSION["startTime"] = (new \DateTime())->format('U');
+        $_SESSION["startTime"] = time();
+        $_SESSION['lifeTime'] = 600;
 
-        echo "true";
-      } else {
-        echo "Incorrect password";
+        $found = true;
       }
-    } else {
-      echo "User with such email is not registered";
     }
   }
+  return $found;
+}
+
+function logOut()
+{
+  $_SESSION = array();
+  session_destroy();
+  header('Location: ../index.php');
 }

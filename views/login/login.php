@@ -1,17 +1,16 @@
 <!-- TODO Application entry point. Login view -->
-
 <html lang="en">
 
 <?php
 
-session_start();
 if (isset($_GET['logout'])) {
   echo "<script type='text/javascript'>alert('Your session expired!');</script>";
 }
 
-if (isset($_SESSION['userId'])) {
-  header('Location: src/dashboard.php');
+if (isset($_SESSION['username'])) {
+  header('Location: ?controller=login&user=' . $_SESSION['userId']);
 }
+
 ?>
 
 <head>
@@ -19,15 +18,15 @@ if (isset($_SESSION['userId'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Employee Managment</title>
   <!-- OWN STYLE -->
-  <link href="css/login.css" rel="stylesheet">
-  <link href="css/main.css" rel="stylesheet">
+  <link href="assets/css/login.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
   <!-- DEPENDENCIES - JQUERY AND BOOTSTRAP-->
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-  <script src="assets/login.js"></script>
+  <script src="assets/js/login.js"></script>
 </head>
 
 <body>
@@ -41,7 +40,7 @@ if (isset($_SESSION['userId'])) {
             <form class="form-signin">
 
               <div class="form-label-group">
-                <input type="text" id="inputName" name="email" class="form-control mb-3" placeholder="Username" required autofocus>
+                <input type="text" id="inputName" name="name" class="form-control mb-3" placeholder="Username" required autofocus>
               </div>
 
               <div class="form-label-group">
@@ -52,7 +51,7 @@ if (isset($_SESSION['userId'])) {
 
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" id="login">Sign in</button>
+              <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">Sign in</button>
 
             </form>
           </div>

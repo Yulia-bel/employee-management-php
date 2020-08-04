@@ -1,23 +1,37 @@
 <?php
 
-include_once(MODELS . 'loginManager.php');
-
 session_start();
 
-if ($_GET["action"] = "logout") {
+//We check if we try to do some action but session is not active
+if (!activeSession() && isset($_GET['action'])) header('Location: index.php');
+else if (sessionTimeout()) echo "Timed Out";
+
+//if we logged out
+if (isset($_GET['logout'])) {
+  echo "<script type='text/javascript'>alert('Your session expired!');</script>";
   logout();
 }
 
+//If session is active
+if (isset($_SESSION['userId'])) {
+  header('Location: ?controller=login&user=' . $_SESSION['userId']);
+}
 
-if (!activeSession() && isset($_GET['action'])) header('Location: index.php');
-else if (sessionTimeout()) logout();
 
 function activeSession()
 {
-  return isset($_SESSION['username']);
+  return isset($_SESSION['userId']);
 }
 
 function sessionTimeout()
 {
-  return time() - $_SESSION['startTime'] > $_SESSION['lifeTime'];
+  if (isset($_SESSION['startTime'])) return time() - $_SESSION['startTime'] > $_SESSION['lifeTime'];
+  else return false;
+}
+
+function logOut()
+{
+  $_SESSION = array();
+  session_destroy();
+  header('Location: index.php');
 }

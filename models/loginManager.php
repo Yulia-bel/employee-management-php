@@ -10,8 +10,6 @@ function checkUser($username, $password)
 
     if ($user->name == $username) {
       if (password_verify($password, $user->password)) {
-
-        session_start();
         $_SESSION["userId"] = $user->userId;
         $_SESSION["startTime"] = time();
         $_SESSION['lifeTime'] = 600;
@@ -21,11 +19,4 @@ function checkUser($username, $password)
     }
   }
   return $found;
-}
-
-function logOut()
-{
-  $_SESSION = array();
-  session_destroy();
-  header('Location: ../index.php');
 }

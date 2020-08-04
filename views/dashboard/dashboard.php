@@ -16,13 +16,13 @@ if (isset($_GET['user_changed'])) {
 }
 
 
-$now = (new \DateTime())->format('U');
+$now = time();
 $timeDifference = $now - $_SESSION["startTime"];
 
 if ($timeDifference > 500) {
     $_SESSION = array();
     session_destroy();
-    header("Location: index.php?logout=$timeDifference");
+    header("Location: index.php?logout");
 }
 ?>
 

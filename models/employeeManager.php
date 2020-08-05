@@ -1,17 +1,7 @@
 <?php
 
-/**
- * EMPLOYEE FUNCTIONS LIBRARY
- *
- * @author: Jose Manuel Orts
- * @date: 11/06/2020
- */
-
-// session_start();
-
 function addEmployee(array $newEmployee)
 {
-    // TODO implement it
 
     $users = json_decode(file_get_contents(RESOURCES . 'employees.json'));
     array_push($users, $newEmployee);
@@ -21,7 +11,6 @@ function addEmployee(array $newEmployee)
 
 function deleteEmployee(string $id)
 {
-    // TODO implement it
 
     $now = (new \DateTime())->format('U');
 
@@ -47,7 +36,6 @@ function deleteEmployee(string $id)
 
 function updateEmployee(array $updateEmployee)
 {
-    // TODO implement it
     $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
 
     foreach ($employees as $employee) {
@@ -67,7 +55,6 @@ function updateEmployee(array $updateEmployee)
 
 function getEmployee(string $id)
 {
-    // TODO implement it
     $requiredEmployee = null;
 
     $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
@@ -95,7 +82,6 @@ function getQueryStringParameters(): array
 
 function getNextIdentifier(array $employeesCollection): int
 {
-    // TODO implement it
 
     $lastIndex = count($employeesCollection) - 1;
     $newId = $employeesCollection[$lastIndex]->id + 1;

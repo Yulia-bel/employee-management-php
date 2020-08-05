@@ -3,8 +3,6 @@
 <?php 
 
 require "assets/head.html";
-// require "models/employeeManager.php";
-
 
 //Saving employee id previously passed through url in js on click event (login.js, line 64)
 
@@ -14,21 +12,7 @@ if(!isset($_GET['id'])) {
   exit('Id required');
 }
 
-// using the function from employeeManager.php directly here - in $employee we save the object of the employee found by employeeManager by id of employee
-
 $employee = getEmployee($_GET["id"]);
-
-/* the properties of $employee we put directly in form as value using the syntax: value='<?= $employee->name ?>'*/
-
-// $now = (new \DateTime())->format('U');
-
-//   $timeDifference = $now - $_SESSION["startTime"];
-
-//   if($timeDifference > 500) {
-//     $_SESSION = array();
-//     session_destroy();
-//     header("Location: index.php?logout=$timeDifference");
-//   }
 
 ?>
 
@@ -40,7 +24,7 @@ $employee = getEmployee($_GET["id"]);
     
 
       <div class="container">
-        <form class="w-75 mt-5" method="POST" action="index.php?controller=employee&action=update">
+        <form class="w-75 mt-5" method="POST" action="index.php?controller=employee">
 
         <div class="form-row mb-3">
           <?php
@@ -51,7 +35,7 @@ $employee = getEmployee($_GET["id"]);
         </div>
 
           <?php
-            include "imageGallery.php";
+            include "views/employee/imageGallery.php";
           ?>
 
           <div class="form-row mb-3">
@@ -70,8 +54,8 @@ $employee = getEmployee($_GET["id"]);
               <label for="emEmail"class="ml-2">Email</label>
               <input type="text" class="form-control" name="emEmail" id="emEmail" placeholder="Email" value="<?= $employee->email ?>">
             </div>
-            <div class="col">  
-              <label for="emGender" class="ml-2">Gender</label>  
+            <div class="col">
+              <label for="emGender" class="ml-2">Gender</label>
               <select id="emGender" name="emGender" class="form-control">
                 <option selected>Female</option>
                 <option>Male</option>

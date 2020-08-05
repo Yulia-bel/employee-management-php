@@ -1,15 +1,12 @@
 <div class="form-row mb-3">
-            
-            <ul id="avatars" class="avatars-list">
-
-            </ul>
-            
+  <ul id="avatars" class="avatars-list">
+  </ul>
 </div>
 
 <script>
       $(document).ready(function() {
         $.ajax({
-          url: "library/avatarsApi.php",
+          url: "libs/avatarsApi.php",
           method: "GET",
           success: function(data) {
 
@@ -26,5 +23,4 @@
           }
         })
       })
-
   </script>

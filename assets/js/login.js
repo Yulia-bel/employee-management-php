@@ -63,23 +63,25 @@ $(document).ready(function () {
             return $.ajax('library/employeeController.php');
           },
           insertItem: function (newEmployee) {
-            console.log(newEmployee)
+            //console.log(newEmployee)
+            // return $.ajax({
             return $.ajax({
               type: "POST",
-              url: "controllers/employeeController.php",
+              url: "index.php?controller=employee",
               data: {
                 action: "addemployee",
                 newEmployee: newEmployee
               }
             }).done(function (response) {
               console.log(response)
-              //alert("Employee named " + newEmployee.name + " inserted successfully!");
+              console.log('created')
+              alert("Employee named " + newEmployee.name + " inserted successfully!");
             });
           },
           deleteItem: function (employee) {
             return $.ajax({
               type: "DELETE",
-              url: ".controllers/employeeController.php",
+              url: `index.php?controller=employee`,
               data: {
                 "deleteId": employee.id
               },
@@ -98,7 +100,7 @@ $(document).ready(function () {
         onItemInserting: function (args) {
           if (args.item.id === undefined) {
             $.ajax({
-              url: "controllers/employeeController.php",
+              url: "index.php?controller=employee",
               method: "POST",
               data: {
                 action: "getId"

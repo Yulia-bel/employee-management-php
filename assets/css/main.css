@@ -23,7 +23,6 @@
     margin-right: 10px;
 }
 
-/* .dashboard-link:hover,
-.employee-link:hover {
-    color: rgb(88, 199, 199);
-} */
+.page-footer {
+    height: 75px;
+}

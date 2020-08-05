@@ -83,3 +83,8 @@ function getEmployees()
     $jsonFile = file_get_contents(RESOURCES . 'employees.json');
     echo $jsonFile;
 }
+
+function showDashboard()
+{
+    require_once VIEWS . "dashboard/dashboard.php";
+}

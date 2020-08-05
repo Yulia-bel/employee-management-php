@@ -73,7 +73,6 @@ $(document).ready(function () {
         },
         rowClick: function (row) {
           location.href = `index.php?controller=employee&action=show&id=${row.item.id}`;
-
         },
         onItemInserting: function (args) {
           if (args.item.id === undefined) {
@@ -158,17 +157,23 @@ $(document).ready(function () {
     }
   })
 
+  //If we are showing an employee, highlight the navbar link
+  if (window.location.href.indexOf("controller=employee&action=show") > -1) {
+    $(".employee-link").parent().addClass("active");
+    $(".dashboard-link").parent().removeClass("active");
+  }
+
   $(".dashboard-link").click(() => {
     if (!$(".dashboard-link").parent().hasClass("active")) {
       $(".dashboard-link").parent().addClass("active");
-      $(".employee-link").parent().removeClass("active")
+      $(".employee-link").parent().removeClass("active");
     }
   })
 
   $(".employee-link").click(() => {
     if (!$(".employee-link").parent().hasClass("active")) {
       $(".employee-link").parent().addClass("active");
-      $(".dashboard-link").parent().removeClass("active")
+      $(".dashboard-link").parent().removeClass("active");
     }
   })
 })

@@ -4,13 +4,13 @@
 include "assets/head.html";
 //Saving employee id previously passed through url in js on click event (login.js, line 64)
 
-$employeeId = $_GET['id'];
+// $employeeId = $_GET['id'];
 
-if (!isset($_GET['id'])) {
-  exit('Id required');
-}
+// if (!isset($_GET['id'])) {
+//   exit('Id required');
+// }
 
-$employee = getEmployee($_GET["id"]);
+// $employee = getEmployee($_GET["id"]);
 
 ?>
 

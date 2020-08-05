@@ -72,7 +72,7 @@ if (isset($_REQUEST['action']) && isset($_SESSION['userId'])) {
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == "show") {
-        $output = getEmployee($_GET["id"]);
+        if (isset($_GET['id'])) $employee = getEmployee($_GET["id"]);
         // echo json_encode($output);
         require_once VIEWS . "employee/employee.php";
     }

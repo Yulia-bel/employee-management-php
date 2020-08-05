@@ -2,7 +2,6 @@
 
 function addEmployee(array $newEmployee)
 {
-
     $users = json_decode(file_get_contents(RESOURCES . 'employees.json'));
     array_push($users, $newEmployee);
     file_put_contents(RESOURCES . 'employees.json', json_encode($users));

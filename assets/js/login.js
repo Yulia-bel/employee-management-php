@@ -4,7 +4,6 @@ $(document).ready(function () {
     e.preventDefault()
     let username = $("#inputName").val();
     let password = $("#inputPassword").val();
-    console.log(username);
     $.ajax({
       method: "POST",
       url: "?controller=login",
@@ -13,9 +12,7 @@ $(document).ready(function () {
         password: password
       },
       success: (data) => {
-        console.log(data);
         if (data == "true") {
-          // location.replace("src/dashboard.php");
           location.href = `?controller=login&action=loadDashboard`;
         } else {
           $("#error_message").text(data);
@@ -32,9 +29,6 @@ $(document).ready(function () {
     url: "resources/employees.json",
 
     success: function (data) {
-      console.log(data);
-      // let employees = JSON.parse(data)
-      // console.log(employees);
 
       $("#jsGrid").jsGrid({
         height: "auto",
@@ -51,7 +45,6 @@ $(document).ready(function () {
         controller: {
           insertItem: function (newEmployee) {
             console.log(newEmployee)
-            // return $.ajax({
             $.ajax({
               type: "POST",
               url: "index.php?controller=employee",

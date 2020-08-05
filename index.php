@@ -11,7 +11,8 @@ if (isset($_GET['controller'])) {
     } else {
         $errorMsg = "The page you are trying to access does not exist.";
     }
-} else {
+} elseif (isset($_SESSION['userId'])) header("Location: ?controller=login&action=loadDashboard");
+else {
     require_once CONTROLLERS . "loginController.php";
 }
 

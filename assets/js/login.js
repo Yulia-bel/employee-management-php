@@ -27,16 +27,6 @@ $(document).ready(function () {
     })
   })
 
-  // $("#logout").on("click", function () {
-  //   $.get("libs/sessionHelper.php", {
-  //     action: "logout"
-  //   }, function (data) {
-
-  //     if (data == "success") window.location.replace("index.php");
-  //   })
-  // })
-
-
   $.ajax({
     method: 'GET',
     url: "resources/employees.json",

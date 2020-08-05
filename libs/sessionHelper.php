@@ -12,11 +12,6 @@ if (isset($_GET['logout'])) {
   logout();
 }
 
-//If session is active
-// if (isset($_SESSION['userId']) && !isset($_GET['action'])) {
-//   header('Location: index.php?controller=login&action=loadDashboard');
-// }
-
 
 function activeSession()
 {

@@ -27,16 +27,6 @@ $(document).ready(function () {
     })
   })
 
-  // $("#logout").on("click", function () {
-  //   $.get("libs/sessionHelper.php", {
-  //     action: "logout"
-  //   }, function (data) {
-
-  //     if (data == "success") window.location.replace("index.php");
-  //   })
-  // })
-
-
   $.ajax({
     method: 'GET',
     url: "resources/employees.json",
@@ -59,9 +49,6 @@ $(document).ready(function () {
         pageButtonCount: 5,
         deleteConfirm: "Do you really want to delete this employee?",
         controller: {
-          loadData: function () {
-            return $.ajax('library/employeeController.php');
-          },
           insertItem: function (newEmployee) {
             console.log(newEmployee)
             // return $.ajax({
@@ -178,4 +165,17 @@ $(document).ready(function () {
     }
   })
 
+  $(".dashboard-link").click(() => {
+    if (!$(".dashboard-link").parent().hasClass("active")) {
+      $(".dashboard-link").parent().addClass("active");
+      $(".employee-link").parent().removeClass("active")
+    }
+  })
+
+  $(".employee-link").click(() => {
+    if (!$(".employee-link").parent().hasClass("active")) {
+      $(".employee-link").parent().addClass("active");
+      $(".dashboard-link").parent().removeClass("active")
+    }
+  })
 })

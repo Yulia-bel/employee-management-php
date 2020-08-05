@@ -68,18 +68,6 @@ function getEmployee(string $id)
     return $requiredEmployee;
 }
 
-
-function removeAvatar($id)
-{
-    // TODO implement it
-}
-
-
-function getQueryStringParameters(): array
-{
-    // TODO implement it
-}
-
 function getNextIdentifier(array $employeesCollection): int
 {
 

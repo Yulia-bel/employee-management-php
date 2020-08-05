@@ -7,7 +7,7 @@
  * @date: 11/06/2020
  */
 
-session_start();
+// session_start();
 
 function addEmployee(array $newEmployee)
 {

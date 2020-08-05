@@ -89,9 +89,10 @@ $(document).ready(function () {
           }
         },
         rowClick: function (row) {
-          window.location.replace(`../src/employee.php?employee_id=${row.item.id}`);
+          // window.location.replace(`../src/employee.php?employee_id=${row.item.id}`);
           //TODO modify this replace -> check if the line beneath works as expected
           // location.href = `index.php?view=employee&employee_id=${row.item.id}`;
+          location.href = `index.php?controller=employee&action=show&id=${row.item.id}`;
 
         },
         onItemInserting: function (args) {

@@ -3,16 +3,16 @@
 require_once MODELS . "employeeManager.php";
 
 
-/*
+
 switch ($_SERVER["REQUEST_METHOD"]) {
-    case 'GET':
-        if (isset($_GET['action'])) {
-            if ($_GET['action'] == "show") {
-                $output = getEmployee($_GET["id"]);
-                echo json_encode($output);
-            }
-        }
-        break;
+    // case 'GET':
+    //     if (isset($_GET['action'])) {
+    //         if ($_GET['action'] == "show") {
+    //             $output = getEmployee($_GET["id"]);
+    //             echo json_encode($output);
+    //         }
+    //     }
+    //     break;
 
     case 'POST':
         if (isset($_POST['emName'])) {
@@ -32,50 +32,60 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             );
             updateEmployee($updatedUser);
             //TODO modify this path
-            header("Location: ../dashboard.php?user_changed=true");
+            // header("Location: ../dashboard.php?user_changed=true");
         }
 
-        if (isset($_POST['action'])) {
+        // if (isset($_POST['action'])) {
 
-            if ($_POST['action'] == "select") {
-                getEmployees();
-            }
-            if ($_POST['action'] == "addemployee") {
-                if (isset($_POST['newEmployee']))
+        //     if ($_POST['action'] == "select") {
+        //         getEmployees();
+        //     }
+        //     if ($_POST['action'] == "addemployee") {
+        //         if (isset($_POST['newEmployee']))
 
-                    $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
+        //             $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
 
-                $newEmployee = $_POST['newEmployee'];
-                $newEmployee["id"] = getNextIdentifier($employees);
-                $newEmployee["lastName"] = "";
+        //         $newEmployee = $_POST['newEmployee'];
+        //         $newEmployee["id"] = getNextIdentifier($employees);
+        //         $newEmployee["lastName"] = "";
 
-                addEmployee($newEmployee);
-            }
+        //         addEmployee($newEmployee);
+        //     }
 
-            if ($_POST['action'] == "getId") {
-                $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
-                echo getNextIdentifier($employees);
-            }
-        }
+        //     if ($_POST['action'] == "getId") {
+        //         $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
+        //         echo getNextIdentifier($employees);
+        //     }
+        // }
         break;
 
-    case 'DELETE':
-        parse_str(file_get_contents("php://input"), $_DELETE);
+    // case 'DELETE':
+    //     parse_str(file_get_contents("php://input"), $_DELETE);
 
-        if (isset($_DELETE['deleteId'])) {
-            $result = deleteEmployee($_DELETE['deleteId']);
+    //     if (isset($_DELETE['deleteId'])) {
+    //         $result = deleteEmployee($_DELETE['deleteId']);
 
-            if ($result == "expired") {
-                $_SESSION = array();
-                session_destroy();
-                echo $result;
-            }
-        }
-        break;
+    //         if ($result == "expired") {
+    //             $_SESSION = array();
+    //             session_destroy();
+    //             echo $result;
+    //         }
+    //     }
+    //     break;
 }
-*/
 
 
 if (isset($_REQUEST['action']) && isset($_SESSION['userId'])) {
     if (function_exists($_REQUEST['action'])) call_user_func($_REQUEST['action'], $_REQUEST);
 }
+
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == "show") {
+        $output = getEmployee($_GET["id"]);
+        // echo json_encode($output);
+        require_once VIEWS . "employee/employee.php";
+    }
+}
+// if (!isset($_['userId'])) require_once VIEWS . "login/login.php";
+
+if (!isset($_SESSION['userId'])) require_once VIEWS . "login/login.php";

@@ -13,8 +13,8 @@ if (isset($_GET['logout'])) {
 }
 
 //If session is active
-// if (isset($_SESSION['userId'])) {
-//   header('Location: ?controller=login&action=loadDashboard');
+// if (isset($_SESSION['userId']) && !isset($_GET['action'])) {
+//   header('Location: index.php?controller=login&action=loadDashboard');
 // }
 
 

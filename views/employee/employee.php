@@ -2,48 +2,45 @@
 <html>
 <?php 
 
-require "../assets/head.html";
-require "library/employeeManager.php";
+require "assets/head.html";
+// require "models/employeeManager.php";
 
-if(!isset($_SESSION["userId"])) {
-    header('Location: ../index.php');
-}
 
 //Saving employee id previously passed through url in js on click event (login.js, line 64)
 
-$employeeId = $_GET['employee_id'];
+$employeeId = $_GET['id'];
 
-if(!isset($_GET['employee_id'])) {
+if(!isset($_GET['id'])) {
   exit('Id required');
 }
 
 // using the function from employeeManager.php directly here - in $employee we save the object of the employee found by employeeManager by id of employee
 
-$employee = getEmployee($_GET["employee_id"]);
+$employee = getEmployee($_GET["id"]);
 
 /* the properties of $employee we put directly in form as value using the syntax: value='<?= $employee->name ?>'*/
 
-$now = (new \DateTime())->format('U');
+// $now = (new \DateTime())->format('U');
 
-  $timeDifference = $now - $_SESSION["startTime"];
+//   $timeDifference = $now - $_SESSION["startTime"];
 
-  if($timeDifference > 500) {
-    $_SESSION = array();
-    session_destroy();
-    header("Location: ../index.php?logout=$timeDifference");
-  }
+//   if($timeDifference > 500) {
+//     $_SESSION = array();
+//     session_destroy();
+//     header("Location: index.php?logout=$timeDifference");
+//   }
 
 ?>
 
     <body>
     <?php
-    include "../assets/header.html";
+    include "assets/header.html";
     ?>
 
     
 
       <div class="container">
-        <form class="w-75 mt-5" method="POST" action="library/employeeController.php">
+        <form class="w-75 mt-5" method="POST" action="index.php?controller=employee&action=update">
 
         <div class="form-row mb-3">
           <?php
@@ -120,13 +117,13 @@ $now = (new \DateTime())->format('U');
           <div class="form-row mb-3">
             <div class="col">
               <input type="submit" class="btn btn-primary mr-4" id="emSave" value="Submit">
-              <input type="button" class="btn btn-primary" id="emReturn" value="Return" onclick="location.href='dashboard.php'">
+              <input type="button" class="btn btn-primary" id="emReturn" value="Return" onclick="location.href='?controller=login&action=loadDashboard'">
             </div>
           </div>
         </form>
       </div>
          
-      <script src="../assets/login.js"></script>
-      <script type="text/javascript" src="../node_modules/jsgrid/dist/jsgrid.min.js"></script>
+      <script src="assets/js/login.js"></script>
+      <script type="text/javascript" src="node_modules/jsgrid/dist/jsgrid.min.js"></script>
     </body>
 </html>

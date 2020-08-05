@@ -49,9 +49,6 @@ $(document).ready(function () {
         pageButtonCount: 5,
         deleteConfirm: "Do you really want to delete this employee?",
         controller: {
-          loadData: function () {
-            return $.ajax('library/employeeController.php');
-          },
           insertItem: function (newEmployee) {
             console.log(newEmployee)
             return $.ajax({

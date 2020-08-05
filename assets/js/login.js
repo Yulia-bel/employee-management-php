@@ -167,4 +167,17 @@ $(document).ready(function () {
     }
   })
 
+  $(".dashboard-link").click(() => {
+    if (!$(".dashboard-link").parent().hasClass("active")) {
+      $(".dashboard-link").parent().addClass("active");
+      $(".employee-link").parent().removeClass("active")
+    }
+  })
+
+  $(".employee-link").click(() => {
+    if (!$(".employee-link").parent().hasClass("active")) {
+      $(".employee-link").parent().addClass("active");
+      $(".dashboard-link").parent().removeClass("active")
+    }
+  })
 })

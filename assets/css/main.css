@@ -26,3 +26,11 @@
 .page-footer {
     height: 75px;
 }
+
+.general-container{
+    min-height: 100vh;
+}
+
+.contaienr{
+    flex-grow: 1;
+}

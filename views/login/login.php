@@ -19,38 +19,40 @@
 
 
 <body>
-  <?php include "assets/loginheader.html"; ?>
+<div class="general-container d-flex flex-column justify-content-between">
+    <?php include "assets/loginheader.html"; ?>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center mb-5">Sign In</h5>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center mb-5">Sign In</h5>
 
-            <form class="form-signin">
+              <form class="form-signin">
 
-              <div class="form-label-group">
-                <input type="text" id="inputName" name="name" class="form-control mb-3" placeholder="Username" required autofocus>
-              </div>
+                <div class="form-label-group">
+                  <input type="text" id="inputName" name="name" class="form-control mb-3" placeholder="Username" required autofocus>
+                </div>
 
-              <div class="form-label-group">
-                <input type="password" id="inputPassword" name="password" class="form-control mb-3" placeholder="Password" required>
-              </div>
+                <div class="form-label-group">
+                  <input type="password" id="inputPassword" name="password" class="form-control mb-3" placeholder="Password" required>
+                </div>
 
-              <div class="form-label-group invisible" id="error_message">
+                <div class="form-label-group invisible" id="error_message">
 
-              </div>
+                </div>
 
-              <button class="btn btn-lg btn-primary btn-block" type="button" id="login">Sign in</button>
+                <button class="btn btn-lg btn-primary btn-block" type="button" id="login">Sign in</button>
 
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <?php include 'assets/footer.html'; ?>
   </div>
-  <?php include 'assets/footer.html'; ?>
   <script type="text/javascript" src="node_modules/jsgrid/dist/jsgrid.min.js"></script>
 
 </body>

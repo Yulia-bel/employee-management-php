@@ -25,8 +25,10 @@ include "assets/head.html";
 
       <div class="form-row mb-3">
         <?php
-        if (property_exists($employee, "photo")) echo "<img src='$employee->photo' alt='No avatar' width='300' height='300'>";
-        else echo "No avatar chosen"
+        if (isset($employee)) {
+          if (property_exists($employee, "photo")) echo "<img src='$employee->photo' alt='No avatar' width='300' height='300'>";
+          else echo "No avatar chosen";
+        }
         ?>
 
       </div>
@@ -38,18 +40,18 @@ include "assets/head.html";
       <div class="form-row mb-3">
         <div class="col">
           <label for="emName" class="ml-2">First Name</label>
-          <input type="text" class="form-control" name="emName" id="emName" placeholder="First name" value="<?= $employee->name ?>">
+          <input type="text" class="form-control" name="emName" id="emName" placeholder="First name" value="<?php if (isset($employee)) echo $employee->name ?>">
         </div>
         <div class="col">
           <label for="emLname" class="ml-2">Last Name</label>
-          <input type="text" class="form-control" name="emLname" id="emLname" placeholder="Last name" value="<?= $employee->lastName ?>">
+          <input type="text" class="form-control" name="emLname" id="emLname" placeholder="Last name" value="<?php if (isset($employee)) echo $employee->lastName ?>">
         </div>
       </div>
 
       <div class="form-row mb-3">
         <div class="col">
           <label for="emEmail" class="ml-2">Email</label>
-          <input type="text" class="form-control" name="emEmail" id="emEmail" placeholder="Email" value="<?= $employee->email ?>">
+          <input type="text" class="form-control" name="emEmail" id="emEmail" placeholder="Email" value="<?php if (isset($employee)) echo $employee->email ?>">
         </div>
         <div class="col">
           <label for="emGender" class="ml-2">Gender</label>
@@ -63,34 +65,34 @@ include "assets/head.html";
       <div class="form-row mb-3">
         <div class="col">
           <label for="emCity" class="ml-2">City</label>
-          <input type="text" class="form-control" name="emCity" id="emCity" placeholder="City" value="<?= $employee->city ?>">
+          <input type="text" class="form-control" name="emCity" id="emCity" placeholder="City" value="<?php if (isset($employee)) echo $employee->city ?>">
         </div>
         <div class="col">
           <label for="emStreet" class="ml-2">Street</label>
-          <input type="text" class="form-control" name="emStreet" id="emStreet" placeholder="Street Address" value="<?= $employee->streetAddress ?>">
+          <input type="text" class="form-control" name="emStreet" id="emStreet" placeholder="Street Address" value="<?php if (isset($employee)) echo $employee->streetAddress ?>">
         </div>
       </div>
 
       <div class="form-row mb-3">
         <div class="col">
           <label for="emState" class="ml-2">State</label>
-          <input type="text" class="form-control" name="emState" id="emState" placeholder="State" value="<?= $employee->state ?>">
+          <input type="text" class="form-control" name="emState" id="emState" placeholder="State" value="<?php if (isset($employee)) echo $employee->state ?>">
         </div>
         <div class="col">
           <label for="emAge" class="ml-2">Age</label>
-          <input type="text" class="form-control" name="emAge" id="emAge" placeholder="Age" value="<?= $employee->age ?>">
+          <input type="text" class="form-control" name="emAge" id="emAge" placeholder="Age" value="<?php if (isset($employee)) echo $employee->age ?>">
         </div>
       </div>
 
       <div class="form-row mb-3">
         <div class="col">
           <label for="emPostal" class="ml-2">Postal Code</label>
-          <input type="text" class="form-control" name="emPostal" id="emPostal" placeholder="Postal Code" value="<?= $employee->postalCode ?>">
+          <input type="text" class="form-control" name="emPostal" id="emPostal" placeholder="Postal Code" value="<?php if (isset($employee)) echo $employee->postalCode ?>">
         </div>
         <div class="col">
           <label for="emPhone" class="ml-2">Phone Number</label>
-          <input type="text" class="form-control" name="emPhone" id="emPhone" placeholder="Phone Number" value="<?= $employee->phoneNumber ?>">
-          <input type="text" class="form-control invisible" name="emId" id="emId" placeholder="Phone Number" value="<?= $employee->id ?>">
+          <input type="text" class="form-control" name="emPhone" id="emPhone" placeholder="Phone Number" value="<?php if (isset($employee)) echo $employee->phoneNumber ?>">
+          <input type="text" class="form-control invisible" name="emId" id="emId" placeholder="Phone Number" value="<?php if (isset($employee)) echo $employee->id ?>">
           <input type="text" class="form-control invisible" name="emPhoto" id="emPhoto" placeholder="Phone Number" value="">
         </div>
       </div>

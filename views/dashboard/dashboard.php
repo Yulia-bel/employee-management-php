@@ -1,16 +1,7 @@
 <!-- TODO Main view or Employees Grid View here is where you get when logged here there's the grid of employees -->
 
 <html>
-<?php
-
-include "assets/head.html";
-
-// if (isset($_GET['user_changed'])) {
-//     $changed = $_GET['user_changed'];
-//     echo "<script type='text/javascript'>alert('Changes saved!');</script>";
-// }
-
-?>
+<?php include "assets/head.html"; ?>
 
 <body>
     <?php
@@ -23,6 +14,7 @@ include "assets/head.html";
 
     </div>
 
+    <?php include 'assets/footer.html'; ?>
 
     <script src="assets/js/login.js"></script>
     <script type="text/javascript" src="node_modules/jsgrid/dist/jsgrid.min.js"></script>

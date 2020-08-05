@@ -47,6 +47,7 @@
       </div>
     </div>
   </div>
+  <?php include 'assets/footer.html'; ?>
   <script type="text/javascript" src="node_modules/jsgrid/dist/jsgrid.min.js"></script>
 
 </body>

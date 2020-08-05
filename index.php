@@ -3,6 +3,7 @@
 include_once "config/constants.php";
 include_once "libs/sessionHelper.php";
 
+
 if (isset($_GET['controller'])) {
     $controller = getControllerPath($_GET['controller']);
     $fileExists = file_exists($controller);

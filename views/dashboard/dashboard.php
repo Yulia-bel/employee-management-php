@@ -4,18 +4,17 @@
 <?php include "assets/head.html"; ?>
 
 <body>
-    <?php
-    include "assets/header.html";
-    ?>
+    <div class="general-container d-flex flex-column justify-content-between">
+        <?php
+        include "assets/header.html";
+        ?>
 
-    <div class="container-main py-5 px-4 px-md-5 container-fluid">
+        <div class="container-main py-5 px-4 px-md-5 container-fluid">
+            <div id="jsGrid"></div>
+        </div>
 
-        <div id="jsGrid"></div>
-
+        <?php include 'assets/footer.html'; ?>
     </div>
-
-    <?php include 'assets/footer.html'; ?>
-
     <script src="assets/js/login.js"></script>
     <script type="text/javascript" src="node_modules/jsgrid/dist/jsgrid.min.js"></script>
 

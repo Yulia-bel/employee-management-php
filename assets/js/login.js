@@ -53,8 +53,8 @@ $(document).ready(function () {
                 newEmployee: newEmployee
               }
             }).done(function (response) {
-              console.log(response)
-              console.log('created')
+              console.log(response);
+              // console.log('created');
               alert("Employee named " + newEmployee.name + " inserted successfully!");
               // location.href = `?controller=login&action=loadDashboard`;
             });

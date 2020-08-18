@@ -15,9 +15,7 @@ include "assets/head.html";
 ?>
 
 <body>
-  <?php
-  include "assets/header.html";
-  ?>
+  <?php include "assets/header.html"; ?>
 
 
   <div class="container">

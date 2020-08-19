@@ -2,53 +2,49 @@
 
 function addEmployee(array $newEmployee)
 {
-    $users = json_decode(file_get_contents(RESOURCES . 'employees.json'));
-    array_push($users, $newEmployee);
-    file_put_contents(RESOURCES . 'employees.json', json_encode($users));
+    $employees = readEmployees();
+    $newEmployee['id'] = getNextIdentifier($employees);
+    array_push($employees, $newEmployee);
+    return writeEmployees($employees) ? $newEmployee : false;
+}
+
+function writeEmployees($data)
+{
+    $data = json_encode($data, JSON_PRETTY_PRINT);
+    $result = file_put_contents(RESOURCES . 'employees.json', $data);
+    return is_numeric($result);
+}
+
+function readEmployees()
+{
+    $data = file_get_contents(RESOURCES . 'employees.json');
+    return json_decode($data);
 }
 
 
 function deleteEmployee(string $id)
 {
+    $employees = readEmployees();
 
-    $now = (new \DateTime())->format('U');
+    $key = array_search($id, array_column($employees, 'id'));
 
-    $timeDifference = $now - $_SESSION["startTime"];
+    if (!is_numeric($key)) return false;
+    array_splice($employees, $key, 1);
+    //TODO  is this echo necessary?
+    echo "deleted";
 
-    if ($timeDifference > 500) {
-        echo "expired";
-    } else {
-        $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
-
-        foreach ($employees as $employee) {
-
-            if ($employee->id == $id) {
-                $index = array_search($employee, $employees);
-                array_splice($employees, $index, 1);
-                file_put_contents(RESOURCES . 'employees.json', json_encode($employees));
-                echo "deleted";
-            }
-        }
-    }
+    return writeEmployees($employees);
 }
 
 
 function updateEmployee(array $updateEmployee)
 {
-    $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
+    $employees = readEmployees();
 
-    foreach ($employees as $employee) {
-        if ($employee->id == $updateEmployee['id']) {
-
-            $key = array_search($employee, $employees);
-
-            $object = json_decode(json_encode($updateEmployee), FALSE);
-
-            $employees[$key] = $object;
-
-            file_put_contents(RESOURCES . 'employees.json', json_encode($employees));
-        }
-    }
+    $key = array_search($updateEmployee['id'], array_column($employees, 'id'));
+    if (!is_numeric($key)) return false;
+    $employees[$key] = $updateEmployee;
+    return writeEmployees($employees) ? $employees[$key] : false;
 }
 
 
@@ -67,13 +63,11 @@ function getEmployee(string $id)
     return $requiredEmployee;
 }
 
+
 function getNextIdentifier(array $employeesCollection): int
 {
-
-    $lastIndex = count($employeesCollection) - 1;
-    $newId = $employeesCollection[$lastIndex]->id + 1;
-    $newIdInt = (int)$newId;
-    return $newIdInt;
+    $last_id = (int) end($employeesCollection)->id;
+    return $last_id + 1;
 }
 
 //My functions 

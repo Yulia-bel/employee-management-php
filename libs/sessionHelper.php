@@ -3,11 +3,11 @@
 session_start();
 
 //We check if we try to do some action but session is not active
-if (!activeSession() && isset($_GET['action'])) header('Location: index.php');
+if (!activeSession() && isset($_REQUEST['action'])) header('Location: index.php');
 // else if (sessionTimeout()) logout();
 
 //if we logged out
-if (isset($_GET['logout'])) {
+if (isset($_REQUEST['logout'])) {
   echo "<script type='text/javascript'>alert('Your session expired!');</script>";
   logout();
 }

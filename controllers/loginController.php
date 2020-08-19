@@ -1,11 +1,11 @@
 <?php
 require_once MODELS . 'loginManager.php';
 
-if (isset($_POST["name"])) {
-  $output = checkUser($_POST["name"], $_POST["password"]);
+if (isset($_REQUEST["name"])) {
+  $output = checkUser($_REQUEST["name"], $_REQUEST["password"]);
   if ($output == true) {
-    unset($_POST["name"]);
-    unset($_POST["password"]);
+    unset($_REQUEST["name"]);
+    unset($_REQUEST["password"]);
     echo "true";
   }
 }

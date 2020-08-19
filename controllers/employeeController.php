@@ -6,48 +6,64 @@ require_once MODELS . "employeeManager.php";
 
 switch ($_SERVER["REQUEST_METHOD"]) {
 
+    case 'GET':
+        if (isset($_REQUEST['action']) && isset($_SESSION['userId'])) {
+            if (function_exists($_REQUEST['action'])) call_user_func($_REQUEST['action'], $_REQUEST);
+        }
+
+        if (isset($_REQUEST['action'])) {
+            if ($_REQUEST['action'] == "showEmployee") {
+                if (isset($_REQUEST['id'])) $employee = getEmployee($_GET["id"]);
+                // echo json_encode($output);
+                require_once VIEWS . "employee/employee.php";
+            }
+        }
+        break;
     case 'POST':
-        if (isset($_POST['emName'])) {
+
+        //If the user is created from the employee.php view
+        if (isset($_REQUEST['emName'])) {
             $updatedUser = array(
-                "id" => $_POST['emId'],
-                "name" => $_POST['emName'],
-                "lastName" => $_POST['emLname'],
-                "email" => $_POST['emEmail'],
-                "gender" => $_POST['emGender'],
-                "age" => $_POST['emAge'],
-                "streetAddress" => $_POST['emStreet'],
-                "city" => $_POST['emCity'],
-                "state" => $_POST['emState'],
-                "postalCode" => $_POST['emPostal'],
-                "phoneNumber" => $_POST['emPhone'],
-                "photo" => $_POST['emPhoto']
+                "id" => $_REQUEST['emId'],
+                "name" => $_REQUEST['emName'],
+                "lastName" => $_REQUEST['emLname'],
+                "email" => $_REQUEST['emEmail'],
+                "gender" => $_REQUEST['emGender'],
+                "age" => $_REQUEST['emAge'],
+                "streetAddress" => $_REQUEST['emStreet'],
+                "city" => $_REQUEST['emCity'],
+                "state" => $_REQUEST['emState'],
+                "postalCode" => $_REQUEST['emPostal'],
+                "phoneNumber" => $_REQUEST['emPhone'],
+                "photo" => $_REQUEST['emPhoto']
             );
             updateEmployee($updatedUser);
             require_once VIEWS . "dashboard/dashboard.php";
         }
 
-        if (isset($_POST['action'])) {
+        if (isset($_REQUEST['action'])) {
 
-            if ($_POST['action'] == "select") {
+            if ($_REQUEST['action'] == "select") {
                 getEmployees();
-            }
-            if ($_POST['action'] == "addemployee") {
-                if (isset($_POST['newEmployee']))
+            } else if ($_REQUEST['action'] == "addemployee") {
+                // if (isset($_POST['newEmployee']))
+                $employees = readEmployees();
 
-                    $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
+                $newEmployee = $_REQUEST['newEmployee'];
+                // echo $newEmployee;
 
-                $newEmployee = $_POST['newEmployee'];
-                $newEmployee["id"] = getNextIdentifier($employees);
-                $newEmployee["lastName"] = "";
-
-                addEmployee($newEmployee);
-            }
-
-            if ($_POST['action'] == "getId") {
+                $data = addEmployee($newEmployee);
+                if ($data) echo json_encode($data);
+                else http_response_code(500);
+            } else if ($_REQUEST['action'] == "getId") {
                 $employees = json_decode(file_get_contents(RESOURCES . 'employees.json'));
                 echo getNextIdentifier($employees);
             }
         }
+
+        // unset($_PUT['action']);
+        // unset($_PUT['controller']);
+
         break;
 
     case 'DELETE':
@@ -65,17 +81,5 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         break;
 }
 
-
-if (isset($_REQUEST['action']) && isset($_SESSION['userId'])) {
-    if (function_exists($_REQUEST['action'])) call_user_func($_REQUEST['action'], $_REQUEST);
-}
-
-if (isset($_GET['action'])) {
-    if ($_GET['action'] == "showEmployee") {
-        if (isset($_GET['id'])) $employee = getEmployee($_GET["id"]);
-        // echo json_encode($output);
-        require_once VIEWS . "employee/employee.php";
-    }
-}
 
 if (!isset($_SESSION['userId'])) require_once VIEWS . "login/login.php";

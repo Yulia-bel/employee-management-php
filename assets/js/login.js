@@ -29,7 +29,6 @@ $(document).ready(function () {
     url: "resources/employees.json",
 
     success: function (data) {
-
       $("#jsGrid").jsGrid({
         height: "auto",
         width: "100%",
@@ -44,20 +43,18 @@ $(document).ready(function () {
         deleteConfirm: "Do you really want to delete this employee?",
         controller: {
           insertItem: function (newEmployee) {
-            console.log(newEmployee)
-            $.ajax({
-              type: "POST",
-              url: "index.php?controller=employee",
+            return $.ajax({
+              method: "POST",
+              url: "index.php",
               data: {
+                controller: "employee",
                 action: "addemployee",
                 newEmployee: newEmployee
               }
-            }).done(function (response) {
-              console.log(response);
-              // console.log('created');
+            }).done(response => {
               alert("Employee named " + newEmployee.name + " inserted successfully!");
-              // location.href = `?controller=login&action=loadDashboard`;
-            });
+              return response;
+            }).fail(console.log);
           },
           deleteItem: function (employee) {
             return $.ajax({
@@ -67,28 +64,28 @@ $(document).ready(function () {
                 "deleteId": employee.id
               },
             }).done(function (response) {
-              alert(response);
-            });
+              alert("Employee deleted");
+            }).fail(console.log);
           }
         },
         rowClick: function (row) {
           location.href = `index.php?controller=employee&action=showEmployee&id=${row.item.id}`;
         },
-        onItemInserting: function (args) {
-          if (args.item.id === undefined) {
-            $.ajax({
-              url: "index.php?controller=employee",
-              method: "POST",
-              data: {
-                action: "getId"
-              },
-              success: function (data) {
-                console.log(data)
-                args.item.id = data
-              }
-            })
-          }
-        },
+        //Not necessary this function?
+        // onItemInserting: function (args) {
+        //   if (args.item.id === undefined) {
+        //     $.ajax({
+        //       url: "index.php?controller=employee",
+        //       method: "POST",
+        //       data: {
+        //         action: "getId"
+        //       },
+        //       success: function (data) {
+        //         args.item.id = data;
+        //       }
+        //     })
+        //   }
+        // },
 
         data: data,
 

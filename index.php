@@ -4,8 +4,8 @@ include_once "config/constants.php";
 include_once "libs/sessionHelper.php";
 
 
-if (isset($_GET['controller'])) {
-    $controller = getControllerPath($_GET['controller']);
+if (isset($_REQUEST['controller'])) {
+    $controller = getControllerPath($_REQUEST['controller']);
     $fileExists = file_exists($controller);
     if ($fileExists) {
         require_once $controller;

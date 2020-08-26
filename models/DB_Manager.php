@@ -1,22 +1,19 @@
 <?php
+include_once "../config/db.php";
 
-$db = "employee_management";
 
 function ConnectSQL()
 {
-    $user = "root";
-    $pass = "";
-    $server = "localhost";
-    $connection = new mysqli($server, $user, $pass);
+    $connection = new mysqli(HOST, USER, PASSWORD);
     if ($connection->connect_error) {
         die("Error while connecting: " . $connection->connect_error);
     }
     return $connection;
 }
 
-function CreateDB($connection, $db)
+function CreateDB($connection)
 {
-    $sql = "CREATE DATABASE " . $db;
+    $sql = "CREATE DATABASE " . DATABASE;
     if ($connection->query($sql) === true) {
         echo "DataBase created correctly.";
     } else {
@@ -24,9 +21,9 @@ function CreateDB($connection, $db)
     }
 }
 
-function SelectDB($connection, $db)
+function SelectDB($connection)
 {
-    $sql = "USE " . $db;
+    $sql = "USE " . DATABASE;
 
     if ($connection->query($sql) === true) {
         echo "Database selected <br>";

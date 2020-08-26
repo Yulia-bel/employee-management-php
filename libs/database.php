@@ -1,17 +1,14 @@
 <?php
-
 require_once "../models/DB_Manager.php";
-
-$db = "employee_management";
 
 //Connect with server
 $connection = ConnectSQL();
 
 //Create DB
-CreateDB($connection, $db);
+CreateDB($connection);
 
 //Select DB
-SelectDB($connection, $db);
+SelectDB($connection);
 
 //Create Tables
 $users = "users (

@@ -1,16 +1,6 @@
 <?php
 require_once "../models/DB_Manager.php";
 
-//Connect with server
-$connection = ConnectSQL();
-
-//Create DB
-CreateDB($connection);
-
-//Select DB
-SelectDB($connection);
-
-//Create Tables
 $users = "users (
     user_ID INT(4) NOT NULL,
     user_name VARCHAR(16) NOT NULL,
@@ -33,14 +23,8 @@ $employees = "employees (
     photo VARCHAR(200) NOT NULL
 );";
 
-CreateTable($connection, $users);
-CreateTable($connection, $employees);
-
-//Fill tables
-
 $users_values = "INSERT INTO users (user_ID, user_name, user_password, email)
                     VALUES(1,'admin', '$2y$10\$nuh1LEwFt7Q2/wz9/CmTJO91stTBS4cRjiJYBY3sVCARnllI.wzBC', 'admin@assemblerschool.com');";
-FillTable($connection, $users_values);
 
 $employees_values = "INSERT INTO employees (employee_ID, employee_name, employee_lastName, email, gender, age, streetAddress, city, country_state, postalCode, phoneNumber, photo)
                     VALUES('2','John', 'Doe', 'jhondoe@foo.com', 'man', '34', '89', 'New York', 'WA', '09889', '1283645645', 'https:\/\/i.imgur.com\/E34i4pP.jpg'),
@@ -52,4 +36,40 @@ $employees_values = "INSERT INTO employees (employee_ID, employee_name, employee
                     ('8','Ale', 'Guyk', 'ale@gmail.com', 'man', '27', '6', 'Vice City', 'CA', '08912', '678346255', 'https:\/\/randomuser.me\/api\/portraits\/women\/82.jpg'),
                     ('9','Jaime', 'Botet', '', 'man', '30', '', '', '', '', '', 'https:\/\/randomuser.me\/api\/portraits\/men\/10.jpg');";
 
-FillTable($connection, $employees_values);
+//Connect with server
+// $connection = ConnectSQL();
+//Create DB
+// CreateDB($connection);
+//Select DB
+// SelectDB($connection, DATABASE);
+//Create Tables
+// CreateTable($connection, $users);
+// CreateTable($connection, $employees);
+//Fill tables
+// FillTable($connection, $users_values);
+// FillTable($connection, $employees_values);
+
+//Select methods with PDO
+$dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
+$pdo = new PDO($dsn, USER, PASSWORD);
+
+$users = $pdo->query("SELECT * FROM users");
+// echo $users;
+$employees = $pdo->query("SELECT * FROM employees");
+
+$userRows = $users->fetchAll(PDO::FETCH_ASSOC);
+// echo "<pre>";
+// print_r($userRows);
+// echo "</pre>";
+$employeesRows = $employees->fetchAll(PDO::FETCH_ASSOC);
+echo "<pre>";
+print_r($employeesRows);
+echo "</pre>";
+
+// foreach ($userRows as $row) {
+//     echo "{$row['user_ID']} {$row['user_name']} {$row['user_password']} {$row['email']} <br>";
+// }
+
+// foreach ($employeesRows as $row) {
+//     echo "{$row['employee_ID']} {$row['employee_name']} {$row['employee_lastName']} {$row['email']} {$row['gender']} {$row['age']} {$row['streetAddress']} {$row['city']} {$row['country_state']} {$row['postalCode']} {$row['phoneNumber']} <br>";
+// }

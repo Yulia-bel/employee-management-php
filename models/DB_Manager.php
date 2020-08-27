@@ -8,6 +8,12 @@ function ConnectSQL()
     if ($connection->connect_error) {
         die("Error while connecting: " . $connection->connect_error);
     }
+
+    // $dsn = "mysql:host=". HOST . ";dbname=". DATABASE;
+    // $pdo = new PDO($dsn, USER, PASSWORD);
+    // $stm = $pdo->query("SELECT * FROM users");
+
+
     return $connection;
 }
 
@@ -21,9 +27,9 @@ function CreateDB($connection)
     }
 }
 
-function SelectDB($connection)
+function SelectDB($connection, $database)
 {
-    $sql = "USE " . DATABASE;
+    $sql = "USE " . $database;
 
     if ($connection->query($sql) === true) {
         echo "Database selected <br>";

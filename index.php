@@ -1,6 +1,7 @@
 <?php
 
 include_once "config/constants.php";
+include_once "config/db.php";
 include_once "libs/sessionHelper.php";
 
 

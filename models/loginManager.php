@@ -2,7 +2,11 @@
 
 function checkUser($username, $password)
 {
-  $users = json_decode(file_get_contents(RESOURCES . 'users.json'))->users;
+  // $users = json_decode(file_get_contents(RESOURCES . 'users.json'))->users;
+  $dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
+  $pdo = new PDO($dsn, USER, PASSWORD);
+  $users = $pdo->query("SELECT * FROM users");
+
   $found = false;
 
   foreach ($users as $user) {

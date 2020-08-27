@@ -26,7 +26,8 @@ $(document).ready(function () {
 
   $.ajax({
     method: 'GET',
-    url: "resources/employees.json",
+    // url: "resources/employees.json",
+    url: "libs/database.php?action=getEmployees",
 
     success: function (data) {
       $("#jsGrid").jsGrid({

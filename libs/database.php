@@ -4,7 +4,7 @@ require_once "../models/DB_Manager.php";
 $users = "users (
     user_ID INT(4) NOT NULL,
     user_name VARCHAR(16) NOT NULL,
-    user_password VARCHAR(16) NOT NULL,
+    user_password VARCHAR(60) NOT NULL,
     email VARCHAR(30) NOT NULL
 );";
 
@@ -23,10 +23,10 @@ $employees = "employees (
     photo VARCHAR(200) NOT NULL
 );";
 
-$users_values = "INSERT INTO users (user_ID, user_name, user_password, email)
+$usersValues = "INSERT INTO users (user_ID, user_name, user_password, email)
                     VALUES(1,'admin', '$2y$10\$nuh1LEwFt7Q2/wz9/CmTJO91stTBS4cRjiJYBY3sVCARnllI.wzBC', 'admin@assemblerschool.com');";
 
-$employees_values = "INSERT INTO employees (employee_ID, employee_name, employee_lastName, email, gender, age, streetAddress, city, country_state, postalCode, phoneNumber, photo)
+$employeesValues = "INSERT INTO employees (employee_ID, employee_name, employee_lastName, email, gender, age, streetAddress, city, country_state, postalCode, phoneNumber, photo)
                     VALUES('2','John', 'Doe', 'jhondoe@foo.com', 'man', '34', '89', 'New York', 'WA', '09889', '1283645645', 'https:\/\/i.imgur.com\/E34i4pP.jpg'),
                     ('3','Leila', 'Mills', 'mills@leila.com', 'Female', '29', '55', 'San Diego', 'CA', '059245', '956202451', ''),
                     ('4','Richard', 'Desmond', 'dismond@foo.com', 'man', '30', '90', 'Salt Lake city', 'UT', '457320', '90876987654', 'https:\/\/images.unsplash.com\/photo-1541271696563-3be2f555fc4e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'),
@@ -46,30 +46,55 @@ $employees_values = "INSERT INTO employees (employee_ID, employee_name, employee
 // CreateTable($connection, $users);
 // CreateTable($connection, $employees);
 //Fill tables
-// FillTable($connection, $users_values);
-// FillTable($connection, $employees_values);
+// FillTable($connection, $usersValues);
+// FillTable($connection, $employeesValues);
 
 //Select methods with PDO
 $dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
 $pdo = new PDO($dsn, USER, PASSWORD);
 
-$users = $pdo->query("SELECT * FROM users");
-// echo $users;
-$employees = $pdo->query("SELECT * FROM employees");
-
-$userRows = $users->fetchAll(PDO::FETCH_ASSOC);
+// $users = $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
+$usersObject = $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_OBJ);
 // echo "<pre>";
-// print_r($userRows);
+// print_r($usersObject);
 // echo "</pre>";
-$employeesRows = $employees->fetchAll(PDO::FETCH_ASSOC);
-echo "<pre>";
-print_r($employeesRows);
-echo "</pre>";
 
-// foreach ($userRows as $row) {
-//     echo "{$row['user_ID']} {$row['user_name']} {$row['user_password']} {$row['email']} <br>";
+// $employees = $pdo->query("SELECT * FROM employees")->fetchAll(PDO::FETCH_ASSOC);
+// $employeesObject = $pdo->query("SELECT * FROM employees")->fetchAll(PDO::FETCH_OBJ);
+
+//We return to the AJAX call in login.js the Array of employees
+// if (isset($_GET['action'])) {
+//     if ($_GET['action'] == "getEmployees") {
+//         echo $employeesObject;
+//     } else if ($_GET['action'] == "getUsers") {
+//         echo $usersObject;
+//     }
 // }
 
-// foreach ($employeesRows as $row) {
-//     echo "{$row['employee_ID']} {$row['employee_name']} {$row['employee_lastName']} {$row['email']} {$row['gender']} {$row['age']} {$row['streetAddress']} {$row['city']} {$row['country_state']} {$row['postalCode']} {$row['phoneNumber']} <br>";
-// }
+
+//just trying out stuff
+
+
+$username = "admin";
+$password = "123456";
+
+
+function checkUser($username, $password, $pdo)
+{
+    $usersObject = $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_OBJ);
+
+    $found = false;
+
+    foreach ($usersObject as $user) {
+        if ($user->user_name == $username) {
+            if (password_verify($password, $user->user_password) == true) {
+                $found = true;
+            }
+        }
+    }
+    return $found;
+}
+
+if (checkUser($username, $password, $pdo)) {
+    echo "User athentified!";
+}

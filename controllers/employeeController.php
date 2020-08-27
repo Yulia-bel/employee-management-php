@@ -24,15 +24,15 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         //If the user is created from the employee.php view
         if (isset($_REQUEST['emName'])) {
             $updatedUser = array(
-                "id" => $_REQUEST['emId'],
-                "name" => $_REQUEST['emName'],
-                "lastName" => $_REQUEST['emLname'],
+                "employee_ID" => $_REQUEST['emId'],
+                "employee_name" => $_REQUEST['emName'],
+                "employee_lastName" => $_REQUEST['emLname'],
                 "email" => $_REQUEST['emEmail'],
                 "gender" => $_REQUEST['emGender'],
                 "age" => $_REQUEST['emAge'],
                 "streetAddress" => $_REQUEST['emStreet'],
                 "city" => $_REQUEST['emCity'],
-                "state" => $_REQUEST['emState'],
+                "country_state" => $_REQUEST['emState'],
                 "postalCode" => $_REQUEST['emPostal'],
                 "phoneNumber" => $_REQUEST['emPhone'],
                 "photo" => $_REQUEST['emPhoto']
@@ -60,9 +60,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                 echo getNextIdentifier($employees);
             }
         }
-
-        // unset($_PUT['action']);
-        // unset($_PUT['controller']);
 
         break;
 

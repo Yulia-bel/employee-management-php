@@ -11,7 +11,3 @@ define("USER", 'root');
 
 //PASSWORD -> password of the MySQL user
 define("PASSWORD", '');
-
-//PDO to send SQL queries
-$dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
-$pdo = new PDO($dsn, USER, PASSWORD);

@@ -14,8 +14,10 @@ $(document).ready(function () {
       success: (data) => {
         if (data == "true") {
           location.href = `?controller=login&action=loadDashboard`;
+          $("#error_message").text("");
         } else {
-          $("#error_message").text(data);
+          // $("#error_message").text(data);
+          $("#error_message").text("Wrong Credentials");
           $("#error_message").addClass("text-danger mb-3");
           $("#error_message").removeClass("invisible");
 

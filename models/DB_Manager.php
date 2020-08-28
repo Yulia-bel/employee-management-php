@@ -1,19 +1,12 @@
 <?php
 include_once "../config/db.php";
 
-
 function ConnectSQL()
 {
     $connection = new mysqli(HOST, USER, PASSWORD);
     if ($connection->connect_error) {
         die("Error while connecting: " . $connection->connect_error);
     }
-
-    // $dsn = "mysql:host=". HOST . ";dbname=". DATABASE;
-    // $pdo = new PDO($dsn, USER, PASSWORD);
-    // $stm = $pdo->query("SELECT * FROM users");
-
-
     return $connection;
 }
 
@@ -32,7 +25,7 @@ function SelectDB($connection, $database)
     $sql = "USE " . $database;
 
     if ($connection->query($sql) === true) {
-        echo "Database selected <br>";
+        // echo "Database selected <br>";
     } else {
         die("Error when selecting the database: " . $connection->error);
     }

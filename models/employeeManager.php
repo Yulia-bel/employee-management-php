@@ -4,28 +4,19 @@ function addEmployee(array $newEmployee)
 {
     $employees = readEmployees();
     $newEmployee['employee_id'] = getNextIdentifier($employees);
-    array_push($employees, $newEmployee);
-    return writeEmployees($employees) ? $newEmployee : false;
-}
+    $pdo = SQLConnect();
 
-function writeEmployees($data)
-{
-    //Here we have to loop through all the database and update all elements
-    // $dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
-    // $pdo = new PDO($dsn, USER, PASSWORD);
-    // $employeesObject = $pdo->query("UPDATE  employees")->fetchAll(PDO::FETCH_OBJ);
-
-    $data = json_encode($data, JSON_PRETTY_PRINT);
-    $result = file_put_contents(RESOURCES . 'employees.json', $data);
-    return is_numeric($result);
+    $sql = "INSERT INTO employees";
+    $sql .= "(" . implode(', ', array_keys($newEmployee)) . ")";
+    $sql .= " VALUES ";
+    $sql .= "('" . implode("', '", $newEmployee) . "');";
+    $numberLines = $pdo->query($sql);
+    return is_numeric($numberLines) ? $newEmployee : false;
 }
 
 function readEmployees()
 {
-    // $data = file_get_contents(RESOURCES . 'employees.json');
-    // return json_decode($data);
-    $dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
-    $pdo = new PDO($dsn, USER, PASSWORD);
+    $pdo = SQLConnect();
     $employeesObject = $pdo->query("SELECT * FROM employees")->fetchAll(PDO::FETCH_OBJ);
     return $employeesObject;
 }
@@ -37,12 +28,11 @@ function deleteEmployee(string $id)
 
     $key = array_search($id, array_column($employees, 'employee_ID'));
 
-    if (!is_numeric($key)) return false;
-    array_splice($employees, $key, 1);
-    //TODO  is this echo necessary?
-    echo "deleted";
+    $sql = "DELETE FROM employees WHERE employee_ID = $id;";
 
-    return writeEmployees($employees);
+    $pdo = SQLConnect();
+    $numberLines = $pdo->query($sql);
+    return is_numeric($numberLines);
 }
 
 
@@ -50,10 +40,16 @@ function updateEmployee(array $updateEmployee)
 {
     $employees = readEmployees();
 
-    $key = array_search($updateEmployee['employee_id'], array_column($employees, 'employee_ID'));
+    $key = array_search($updateEmployee['employee_ID'], array_column($employees, 'employee_ID'));
     if (!is_numeric($key)) return false;
-    $employees[$key] = $updateEmployee;
-    return writeEmployees($employees) ? $employees[$key] : false;
+    $id = $employees[$key]['employee_ID'];
+    $sql = " UPDATE employees ";
+    $sql .= " SET " . implode(", ", $updateEmployee);
+    $sql .= " WHERE employee_ID = $id;";
+
+    $pdo = SQLConnect();
+    $numberLines = $pdo->query($sql);
+    return is_numeric($numberLines) ? $updateEmployee : false;
 }
 
 
@@ -86,8 +82,7 @@ function getEmployees()
     // $jsonFile = file_get_contents(RESOURCES . 'employees.json');
     // echo $jsonFile;
 
-    $dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
-    $pdo = new PDO($dsn, USER, PASSWORD);
+    $pdo = SQLConnect();
     $employeesJSON = json_encode($pdo->query("SELECT * FROM employees")->fetchAll(PDO::FETCH_ASSOC));
     echo $employeesJSON;
 }
@@ -95,4 +90,11 @@ function getEmployees()
 function showDashboard()
 {
     require_once VIEWS . "dashboard/dashboard.php";
+}
+
+function SQLConnect()
+{
+    $dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
+    $pdo = new PDO($dsn, USER, PASSWORD);
+    return $pdo;
 }

@@ -20,7 +20,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         }
         break;
     case 'POST':
-
         //If the user is created from the employee.php view
         if (isset($_REQUEST['emName'])) {
             $updatedUser = array(

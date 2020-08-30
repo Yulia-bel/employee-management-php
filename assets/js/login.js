@@ -32,6 +32,7 @@ $(document).ready(function () {
     url: "libs/database.php?action=getEmployees",
 
     success: function (data) {
+      console.log(data);
       $("#jsGrid").jsGrid({
         height: "auto",
         width: "100%",
@@ -99,7 +100,7 @@ $(document).ready(function () {
             width: 0
           },
           {
-            name: "name",
+            name: "employee_name",
             title: "Name",
             type: "text",
             width: 100
@@ -129,7 +130,7 @@ $(document).ready(function () {
             width: 120
           },
           {
-            name: "state",
+            name: "country_state",
             title: "State",
             type: "text",
             width: 70

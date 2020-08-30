@@ -53,48 +53,19 @@ $employeesValues = "INSERT INTO employees (employee_ID, employee_name, employee_
 $dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
 $pdo = new PDO($dsn, USER, PASSWORD);
 
-// $users = $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
+
 $usersObject = $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_OBJ);
-// echo "<pre>";
-// print_r($usersObject);
-// echo "</pre>";
-
-// $employees = $pdo->query("SELECT * FROM employees")->fetchAll(PDO::FETCH_ASSOC);
-// $employeesObject = $pdo->query("SELECT * FROM employees")->fetchAll(PDO::FETCH_OBJ);
-
-//We return to the AJAX call in login.js the Array of employees
-// if (isset($_GET['action'])) {
-//     if ($_GET['action'] == "getEmployees") {
-//         echo $employeesObject;
-//     } else if ($_GET['action'] == "getUsers") {
-//         echo $usersObject;
-//     }
-// }
+$employeesObject = $pdo->query("SELECT * FROM employees")->fetchAll(PDO::FETCH_OBJ);
 
 
-//just trying out stuff
-
-
-$username = "admin";
-$password = "123456";
-
-
-function checkUser($username, $password, $pdo)
-{
-    $usersObject = $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_OBJ);
-
-    $found = false;
-
-    foreach ($usersObject as $user) {
-        if ($user->user_name == $username) {
-            if (password_verify($password, $user->user_password) == true) {
-                $found = true;
-            }
-        }
+// We return to the AJAX call in login.js the Array of employees
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == "getEmployees") {
+        header('Content-Type: application/json');
+        echo json_encode($employeesObject);
+    } else if ($_GET['action'] == "getUsers") {
+        echo $usersObject;
+    } else {
+        if (function_exists($_GET['action'])) call_user_func($_GET['action']);
     }
-    return $found;
-}
-
-if (checkUser($username, $password, $pdo)) {
-    echo "User athentified!";
 }

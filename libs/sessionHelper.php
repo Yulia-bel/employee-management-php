@@ -4,7 +4,7 @@ session_start();
 
 //We check if we try to do some action but session is not active
 if (!activeSession() && isset($_REQUEST['action'])) header('Location: index.php');
-// else if (sessionTimeout()) logout();
+else if (sessionTimeout()) logout();
 
 //if we logged out
 if (isset($_REQUEST['logout'])) {

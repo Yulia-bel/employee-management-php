@@ -3,7 +3,7 @@
 function addEmployee(array $newEmployee)
 {
     $employees = readEmployees();
-    $newEmployee['employee_id'] = getNextIdentifier($employees);
+    $newEmployee['employee_ID'] = getNextIdentifier($employees);
     $pdo = SQLConnect();
 
     $sql = "INSERT INTO employees";
@@ -38,14 +38,19 @@ function deleteEmployee(string $id)
 
 function updateEmployee(array $updateEmployee)
 {
-    $employees = readEmployees();
-
-    $key = array_search($updateEmployee['employee_ID'], array_column($employees, 'employee_ID'));
-    if (!is_numeric($key)) return false;
-    $id = $employees[$key]['employee_ID'];
-    $sql = " UPDATE employees ";
-    $sql .= " SET " . implode(", ", $updateEmployee);
-    $sql .= " WHERE employee_ID = $id;";
+    $sql = " UPDATE employees SET";
+    $sql .= " employee_name = '" . $updateEmployee['employee_name'] . "'";
+    $sql .= ", employee_lastName = '" . $updateEmployee['employee_lastName'] . "'";
+    $sql .= ", email = '" . $updateEmployee['email'] . "'";
+    $sql .= ", gender = '" . $updateEmployee['gender'] . "'";
+    $sql .= ", age = '" . $updateEmployee['age'] . "'";
+    $sql .= ", streetAddress = '" . $updateEmployee['streetAddress'] . "'";
+    $sql .= ", city = '" . $updateEmployee['city'] . "'";
+    $sql .= ", country_state = '" . $updateEmployee['country_state'] . "'";
+    $sql .= ", postalCode = '" . $updateEmployee['postalCode'] . "'";
+    $sql .= ", phoneNumber = '" . $updateEmployee['phoneNumber'] . "'";
+    $sql .= ", photo = '" . $updateEmployee['photo'] . "'";
+    $sql .= " WHERE employee_ID = " . $updateEmployee['employee_ID'] . ';';
 
     $pdo = SQLConnect();
     $numberLines = $pdo->query($sql);
@@ -59,9 +64,9 @@ function getEmployee(string $id)
 
     $employees = readEmployees();
     foreach ($employees as $employee) {
-        if ($employee->employee_id == $id) {
+        if ($employee->employee_ID == $id) {
             $requiredEmployee = $employee;
-            $_SESSION['employeeId'] = $employee->employee_id;
+            $_SESSION['employeeId'] = $employee->employee_ID;
             break;
         }
     }
@@ -71,7 +76,7 @@ function getEmployee(string $id)
 
 function getNextIdentifier(array $employeesCollection): int
 {
-    $last_id = (int) end($employeesCollection)->employee_id;
+    $last_id = (int) end($employeesCollection)->employee_ID;
     return $last_id + 1;
 }
 
@@ -79,9 +84,6 @@ function getNextIdentifier(array $employeesCollection): int
 
 function getEmployees()
 {
-    // $jsonFile = file_get_contents(RESOURCES . 'employees.json');
-    // echo $jsonFile;
-
     $pdo = SQLConnect();
     $employeesJSON = json_encode($pdo->query("SELECT * FROM employees")->fetchAll(PDO::FETCH_ASSOC));
     echo $employeesJSON;

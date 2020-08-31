@@ -14,7 +14,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         if (isset($_REQUEST['action'])) {
             if ($_REQUEST['action'] == "showEmployee") {
                 if (isset($_REQUEST['id'])) $employee = getEmployee($_GET["id"]);
-                // echo json_encode($output);
                 require_once VIEWS . "employee/employee.php";
             }
         }
@@ -41,7 +40,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         }
 
         if (isset($_REQUEST['action'])) {
-
             if ($_REQUEST['action'] == "select") {
                 getEmployees();
             } else if ($_REQUEST['action'] == "addemployee") {

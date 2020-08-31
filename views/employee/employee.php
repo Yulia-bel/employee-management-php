@@ -2,15 +2,6 @@
 <html>
 <?php
 include "assets/head.html";
-//Saving employee id previously passed through url in js on click event (login.js, line 64)
-
-// $employeeId = $_GET['id'];
-
-// if (!isset($_GET['id'])) {
-//   exit('Id required');
-// }
-
-// $employee = getEmployee($_GET["id"]);
 
 ?>
 
@@ -41,11 +32,11 @@ include "assets/head.html";
         <div class="form-row mb-3">
           <div class="col">
             <label for="emName" class="ml-2">First Name</label>
-            <input type="text" class="form-control" name="emName" id="emName" placeholder="First name" value="<?php if (isset($employee)) echo $employee->name ?>">
+            <input type="text" class="form-control" name="emName" id="emName" placeholder="First name" value="<?php if (isset($employee)) echo $employee->employee_name ?>">
           </div>
           <div class="col">
             <label for="emLname" class="ml-2">Last Name</label>
-            <input type="text" class="form-control" name="emLname" id="emLname" placeholder="Last name" value="<?php if (isset($employee)) echo $employee->lastName ?>">
+            <input type="text" class="form-control" name="emLname" id="emLname" placeholder="Last name" value="<?php if (isset($employee)) echo $employee->employee_lastName ?>">
           </div>
         </div>
 
@@ -77,7 +68,7 @@ include "assets/head.html";
         <div class="form-row mb-3">
           <div class="col">
             <label for="emState" class="ml-2">State</label>
-            <input type="text" class="form-control" name="emState" id="emState" placeholder="State" value="<?php if (isset($employee)) echo $employee->state ?>">
+            <input type="text" class="form-control" name="emState" id="emState" placeholder="State" value="<?php if (isset($employee)) echo $employee->country_state ?>">
           </div>
           <div class="col">
             <label for="emAge" class="ml-2">Age</label>
@@ -93,7 +84,7 @@ include "assets/head.html";
           <div class="col">
             <label for="emPhone" class="ml-2">Phone Number</label>
             <input type="text" class="form-control" name="emPhone" id="emPhone" placeholder="Phone Number" value="<?php if (isset($employee)) echo $employee->phoneNumber ?>">
-            <input type="text" class="form-control invisible" name="emId" id="emId" placeholder="Phone Number" value="<?php if (isset($employee)) echo $employee->id ?>">
+            <input type="text" class="form-control invisible" name="emId" id="emId" placeholder="Phone Number" value="<?php if (isset($employee)) echo $employee->employee_ID ?>">
             <input type="text" class="form-control invisible" name="emPhoto" id="emPhoto" placeholder="Phone Number" value="">
           </div>
         </div>

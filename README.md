@@ -4,56 +4,53 @@
   
 ## Application main points  
   
-1. Login and logout with a json file as user storage  
+1. Login and logout with a SQL Database as user storage  
 2. Controlled user session set to 10 minutes  
-3. Show data from a JSON in a JS Grid  
+3. Show data from a SQL Database in a JS Grid  
 4. Pagination of the data configured by the grid  
-5. Employees CRUD Create Read Delete and Update with a json file as employees storage  
+5. Employees CRUD Create Read Delete and Update with from a SQL Database as employees storage  
 6. Employee page  with employee detail  
 7. External web service to get employees images  
 8. Employee avatar through web service images  
   
   
-### File structure  
-This file structure has a specific purpose. So you have to implement all the required over it. Later when we get to OPP and MySQL we will refactor the project to get it more sophisticated, modern and cleaner. Please take care of it!!  
+### Folder organization 
+This file structure has been distributed according to the MVC model (Model-View-Controller) and the structure its as follows:
   
-````  
-assets/  
-css/  
-resources/  
-src/  
- /library
-````
- 
-* Assets contains images and plain HTML files.  
-* Css just css files.  
-* Resources folder contains users.json and employees.json  
-* Src folder contains PHP files which contain HTML or JS  
-* Src/library folder contains PHP files that contain just PHP  
-  
-**We left to you the project files in their folders to give you a structure which we want you to work with in order to later refactor it.**  
+-php-employee-management-v3 - The project folder that contains:
+
+ - _assets/_: Folder that contains css, js and html reusable code
+ - _config/_: Here we define the constants
+ - _controllers/_:  Contains the different controllers
+ - _libs/_:  Contains the different helper functions
+ - _models/_: Contains the different Models/Managers
+ - _node\_modules/_: Folder ignored by git that contains the installation of npm dependencies
+ - _resources/_: Contains the database code used to create the SQL database and the deprecated json files
+ - _views/_:  Contains the different .php views files
+ - _.gitignore_: File that tells **GIT** which files to ignore
+ - _index.php_: Entry point of the application
+ - _package.json_: File describing the project with its dependencies
+ - _package-lock.json_: File listing the installed dependencies
+ - _README.md_: This file
+ - _UML.drawio_: Database SQL UML diagram
+
+
   
 We use some naming conventions when create code files. For instance a file which handles HTTP request we name it as `Controller`.  
   
-In the other hand we have also the concept of `Manager` which typically implements an abstraction layer over a storage system, in this case as we are going to work with json files for a while (bear on mind later we refactor it to MySQL and then we will also have a `Model` file) we would need to create on it all functions we need to access the json file. 
+In the other hand we have also the concept of `Manager` which typically implements an abstraction layer over a storage system.
 
 A file called `Model` implements a database layer is a file which interacts directly with a Database. **On future projects we will refactor this project to add Models and much more!!**
 
 We also added the concept of `Helper` which is a class which its finality is to help `Controllers` and `Managers` to be lighter and to keep single responsibility.  
 
+The **sessionHelper** file needs to be added to each page we visit in order to check if the user session has expired and if so to call the methods of the loginManager to logout the admin user.
 
-```  
-index.php // which is the entry point of the application. The login view
-employeeController.php // file which has JUST the php code to handle employees request  
-employeeManager.php // In this file we left you a list of named mehtods to implement and use.
+To manage de SQL database, we created 3 files:
+ - _database.php_: in this file we handle the calls to the database to retrieve the employees
+ - _DB_manager.php_: This files includes all the functions that handle the SQL and are being called from **database.php**
+ - _db.php_: In this file we define the constants for the database handling and we initialize the DB.
 
-loginController.php // here you need to handle all HTTP request of login things  
-loginManager.php // same thing here you need to write things as login validation logout etc..  
-
-sessionHelper.php // here you can add the code to check if the user session has expired.  
-```
-
-The sessionHelper file need to be added to each page we visit in order to check if the user session has expired and if so to call the methods of the loginManager to logout the admin user.
 
 ### Including or importing code files to current file
 
@@ -98,9 +95,9 @@ So what we have done is to include literally that `if else` of the helper at the
   
 ### Project key points  
   
-The user is stored in `resouces/users.json` file there you have an admin user work with it.  
+The user is stored in the table **users** inside the DB **employee_management**.
   
-The employees are stored `resouces/employees.json` file you have to make a CRUD over this file
+The employees are stored in the table **employees** inside the DB **employee_management**.
   
   
   
@@ -263,3 +260,8 @@ curl_close($curlHandler);
   
 $decodedResponse = json_decode($apiResponse);  
 ````
+
+
+## Authors ✒️
+
+- **Jaime Botet** - _All the work of design and code_ - [Repository](https://code.assemblerschool.com/jaime-botet/php-employee-management-v3)

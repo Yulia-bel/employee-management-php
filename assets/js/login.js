@@ -32,7 +32,7 @@ $(document).ready(function () {
     url: "libs/database.php?action=getEmployees",
 
     success: function (data) {
-      console.log(data);
+      // console.log(data);
       $("#jsGrid").jsGrid({
         height: "auto",
         width: "100%",
@@ -65,7 +65,7 @@ $(document).ready(function () {
               type: "DELETE",
               url: `index.php?controller=employee`,
               data: {
-                "deleteId": employee.id
+                "deleteId": employee.employee_ID
               },
             }).done(function (response) {
               alert("Employee deleted");
@@ -73,7 +73,7 @@ $(document).ready(function () {
           }
         },
         rowClick: function (row) {
-          location.href = `index.php?controller=employee&action=showEmployee&id=${row.item.id}`;
+          location.href = `index.php?controller=employee&action=showEmployee&id=${row.item.employee_ID}`;
         },
         //Not necessary this function?
         // onItemInserting: function (args) {

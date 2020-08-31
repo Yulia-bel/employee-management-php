@@ -264,4 +264,4 @@ $decodedResponse = json_decode($apiResponse);
 
 ## Authors ✒️
 
-- **Jaime Botet** - _All the work of design and code_ - [Repository](https://code.assemblerschool.com/jaime-botet/php-employee-management-v3)
+- **Jaime Botet & Alejandro Palomes** - _All the work of design and code_ - [Repository](https://code.assemblerschool.com/jaime-botet/php-employee-management-v3)

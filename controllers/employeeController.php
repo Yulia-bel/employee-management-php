@@ -4,7 +4,9 @@ require_once MODELS . "employeeManager.php";
 
 
 
-switch ($_SERVER["REQUEST_METHOD"]) {
+
+
+/*switch ($_SERVER["REQUEST_METHOD"]) {
 
     case 'GET':
         if (isset($_REQUEST['action']) && isset($_SESSION['userId'])) {
@@ -76,4 +78,4 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 }
 
 
-if (!isset($_SESSION['userId'])) require_once VIEWS . "login/login.php";
+if (!isset($_SESSION['userId'])) require_once VIEWS . "login/login.php";*/

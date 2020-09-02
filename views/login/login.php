@@ -29,10 +29,10 @@
             <div class="card-body">
               <h5 class="card-title text-center mb-5">Sign In</h5>
 
-              <form class="form-signin">
+              <form class="form-signin" method="POST" action="login/logIn">
 
                 <div class="form-label-group">
-                  <input type="text" id="inputName" name="name" class="form-control mb-3" placeholder="Username" required autofocus>
+                  <input type="text" id="inputName" name="email" class="form-control mb-3" placeholder="Username" required autofocus>
                 </div>
 
                 <div class="form-label-group">
@@ -43,7 +43,7 @@
 
                 </div>
 
-                <button class="btn btn-lg btn-primary btn-block" type="button" id="login">Sign in</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">Sign in</button>
 
               </form>
             </div>

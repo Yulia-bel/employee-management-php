@@ -6,7 +6,7 @@
 <body>
     <div class="general-container d-flex flex-column justify-content-between">
 
-        <?php include "assets/header.html"; ?>
+        <?php include "assets/header.php"; ?>
 
         <div class='main__content d-flex justify-content-center align-items-center flex-column'>
             <div class="container" id="jsGrid">

@@ -209,3 +209,7 @@ function chooseImg(src){
    avatarSel.classList.replace('d-flex', 'd-none');
    avatarCont.classList.replace('d-none', 'd-flex');
 }
+
+ 
+  $(".dashboard-link").parent().removeClass("active")
+  $(".employee-link").parent().addClass("active")

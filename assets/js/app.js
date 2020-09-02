@@ -133,25 +133,8 @@ $(document).ready(function () {
   }
   
 
-  //If we are showing an employee, add/remove the active class in the navbar links
-  if (window.location.href.indexOf("controller=employee&action=showEmployee") > -1) {
-    $(".employee-link").parent().addClass("active");
-    $(".dashboard-link").parent().removeClass("active");
-  }
-
-  //Or when we click, we change the add/remove the active class in the navbar links
-  $(".dashboard-link").click(() => {
-    if (!$(".dashboard-link").parent().hasClass("active")) {
-      $(".dashboard-link").parent().addClass("active");
-      $(".employee-link").parent().removeClass("active");
-    }
-  })
-  $(".employee-link").click(() => {
-    if (!$(".employee-link").parent().hasClass("active")) {
-      $(".employee-link").parent().addClass("active");
-      $(".dashboard-link").parent().removeClass("active");
-    }
-  })
+  $(".dashboard-link").parent().addClass("active")
+  $(".employee-link").parent().removeClass("active")
 
 
 

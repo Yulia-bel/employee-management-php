@@ -29,7 +29,11 @@ class Employee extends Controller {
         $employee = $this->model->getById($id);
         $this->view->employee = $employee;
         $this->view->render('employee/employee');
+    }
 
+    public function update() {
+        $nEmployee = $_POST;
+        $this->model->updateEmployee($nEmployee['id'], $nEmployee);
     }
 }
 

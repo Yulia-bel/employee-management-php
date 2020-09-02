@@ -1,6 +1,6 @@
 <?php
 
-class employeeModel extends Model {
+class EmployeeModel extends Model {
     public function __construct() {
         parent::__construct();
     }
@@ -47,7 +47,55 @@ class employeeModel extends Model {
         if ($stmt->execute() && $stmt->rowCount()) {
             $result = $stmt->fetch(PDO::FETCH_OBJ);
             return $result;
-        };
+        }
+    }
+
+    public function updateEmployee ($id, $nEmployee) {
+
+        $conn = $this->db->connect();
+
+        if($id !== "") {
+            $stmt = $conn->prepare("UPDATE employees SET name = '" 
+            . $nEmployee['name'] . "', lastName = '" 
+            . $nEmployee['lastName'] . "', age = " 
+            . $nEmployee['age'] . ", city='" 
+            . $nEmployee['city'] . "', email='" 
+            . $nEmployee['email'] . "', gender='" 
+            . $nEmployee['gender'] . "', phoneNumber='" 
+            . $nEmployee['phoneNumber'] . "', postalCode=" 
+            . $nEmployee['postalCode'] . ", state='" 
+            . $nEmployee['state'] . "', streetAddress='" 
+            . $nEmployee['streetAddress'] . "', img='" 
+            . $nEmployee['img'] 
+            ."' WHERE id=" . $id);
+            
+            $stmt->execute();
+            echo 'modified';
+        } else {
+            $stmt = $conn->prepare("INSERT INTO employees (name,lastName,age,city,email,gender,phoneNumber,postalCode,state,streetAddress,img) VALUES ('" 
+            . $nEmployee['name'] . "','" 
+            . $nEmployee['lastName'] . "'," 
+            . $nEmployee['age'] . ",'" 
+            . $nEmployee['city'] . "','" 
+            . $nEmployee['email'] . "','" 
+            . $nEmployee['gender'] . "','" 
+            . $nEmployee['phoneNumber'] . "'," 
+            . $nEmployee['postalCode'] . ",'" 
+            . $nEmployee['state'] . "','" 
+            . $nEmployee['streetAddress'] . "','" 
+            . $nEmployee['img'] ."')");
+
+            if ($stmt->execute()) {
+                $stmt = $conn->prepare("SELECT id FROM employees WHERE name='". $nEmployee['name'] ."' AND email='" .$nEmployee['email'] ."' LIMIT 1 " );
+                $stmt->execute();
+
+                if($stmt->rowCount()) {
+                $result = $stmt->fetch(); 
+                echo $result['id'];
+                }
+            }
+        }
+
     }
 }
 

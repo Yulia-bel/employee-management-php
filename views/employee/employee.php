@@ -8,19 +8,25 @@
     <link rel="shortcut icon" href="<?php echo constant('URL'); ?>assets/img/logo.png">
     <title>Employee Edit</title>
 </head>
+
 <body>
     <div class="main d-flex flex-column justify-content-between">
+
         <?php include('assets/header.html') ?>
+
         <div class='main__content d-flex justify-content-center align-items-center flex-column'>
             <div id="formErrMsg" class="d-none errorMsg mb-4 align-items-center justify-content-center alert">
                 <span>Please, correct the highlighted errors.</span>
             </div>
+            
             <div id="profilePicCont" class="profile__img d-flex justify-content-center align-items-center mt-3">
-                <img src="<?= $employee && isset($employee->img) ? $employee->img : "assets/img/usuario.svg" ?>" alt="profile picture" id="profileImg">
+                <img src="<?= $this->employee && isset($this->employee->img) ? $this->employee->img : "assets/img/usuario.svg" ?>" alt="profile picture" id="profileImg">
             </div>
+           
             <div id="profilePicSelect" class="profile__img--selector d-none flex-wrap justify-content-sm-between justify-content-center mt-3">
             </div>
-            <form id="employeeForm" class="my-5" name="employeeInfo" method="POST" action="index.php">
+           
+            <form id="employeeForm" class="my-5" name="employeeInfo" method="POST" action="<?php echo constant('URL'); ?>employee/update">
                 <input type="hidden" name="controller" value="employee">
                 <input type="hidden" name="action" value="updateEmployeeCont">
 
@@ -76,7 +82,7 @@
                     <div class="form-group col-md-6">
                         <label for="phone">Phone Number</label>
                         <input type="tel" name="phone" id="phoneInp" class="form-control" placeholder="Phone number" value="<?= $this->employee && isset($this->employee->phoneNumber) ? $this->employee->phoneNumber : "" ?>">
-                        <input type="hidden" name="id" id="id" value="<?= $this->employee && isset($this->employee->id) ? $this->semployee->id : "" ?>">
+                        <input type="hidden" name="id" id="id" value="<?= $this->employee && isset($this->employee->id) ? $this->employee->id : "" ?>">
                     </div>
                 </div>
                 <div class="mt-3 d-flex justify-content-end">
@@ -90,7 +96,8 @@
     <script src="<?php echo constant('URL'); ?>node_modules/jquery/dist/jquery.js"></script>
     <script src="<?php echo constant('URL'); ?>https://kit.fontawesome.com/de217cab6a.js" crossorigin="anonymous"></script>
     <script src="<?php echo constant('URL'); ?>node_modules/bootstrap/js/dist/index.js" defer></script>
-    <script src="<?php echo constant('URL'); ?>https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="<?php echo constant('URL'); ?>assets/js/utils.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </body>
 </html>

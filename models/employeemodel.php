@@ -33,7 +33,11 @@ class employeeModel extends Model {
         }
     }
 
-    
+    public function deleteEmployee($id) {
+        $conn = $this->db->connect();
+        $stmt = $conn->prepare("DELETE FROM employees WHERE id=". $id);
+        $stmt->execute();
+    }
 }
 
 /*function addEmployee(array $newEmployee)

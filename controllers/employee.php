@@ -17,7 +17,12 @@ class Employee extends Controller {
     public function insert() {
         $newEmployee = $_POST['newEmployee'];
         $this->model->insertEmployee($newEmployee);
+    }
 
+    public function delete() {
+        parse_str(file_get_contents("php://input"), $_DELETE);
+        $deleteId = $_DELETE['deleteId'];
+        $this->model->deleteEmployee($deleteId);
     }
 }
 

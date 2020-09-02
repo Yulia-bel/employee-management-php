@@ -1,9 +1,20 @@
 <?php
 
-require_once MODELS . "employeeManager.php";
+class Employee extends Controller {
+    
+    function __construct(){
+        parent::__construct();
+        $this->view->render('dashboard');
+       // $this->view->employees = [];
+        //echo "employee controller";
+    }
+
+    public function show() {
+        //echo "<br> show method";
+    }
 
 
-
+}
 
 
 /*switch ($_SERVER["REQUEST_METHOD"]) {

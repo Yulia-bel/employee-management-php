@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  $("#login").on("click", function (e) {
+  /*$("#login").on("click", function (e) {
     e.preventDefault()
     let username = $("#inputName").val();
     let password = $("#inputPassword").val();
@@ -24,7 +24,7 @@ $(document).ready(function () {
         }
       }
     })
-  })
+  })*/
 
   $.ajax({
     method: 'GET',

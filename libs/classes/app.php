@@ -3,7 +3,7 @@
 require_once('controllers/error.php');
 
 
-class Route 
+class App 
 {
   function __construct(){
 
@@ -26,17 +26,17 @@ class Route
 
       // if controller is defined in url we require the file from Controllers folder
 
-      $controllerFile = 'controllers/' . $url[0] . 'Controller.php';
+      $controllerFile = 'controllers/' . $url[0] . '.php';
 
       if(file_exists($controllerFile)){
 
           require_once $controllerFile;
 
           // creating object from controller file to load the necesarry Model
-          $controller = $url[0];
-          $controller->loadModel($url[0]);
+          $controller = new $url[0];
+          //$controller->loadModel($url[0]);
           
-          // checking for tother parameters in url array
+          // checking for other parameters in url array
           $numberOfparam = sizeof($url);
 
           if($numberOfparam > 1){
@@ -57,11 +57,11 @@ class Route
                   //print_r($url[1]);
               }
           }else{
-              $controller->render();
+              //$controller->render();
               //print_r($controller);
           }
       }else{
-          $controller = new Error();
+          $controller = new Errorr();
       }
   }
 }

@@ -24,6 +24,13 @@ class Employee extends Controller {
         $deleteId = $_DELETE['deleteId'];
         $this->model->deleteEmployee($deleteId);
     }
+
+    public function details($id) {
+        $employee = $this->model->getById($id);
+        $this->view->employee = $employee;
+        $this->view->render('employee/employee');
+
+    }
 }
 
 

@@ -47,7 +47,7 @@ $(document).ready(function () {
         }
       },
       rowDoubleClick: function (row) {
-        window.location.href = `index.php?controller=employee&action=addEditEmployee&id=${row.item.id}`
+        window.location.href = `details/${row.item.id}`
       },
 
       /*onItemInserting: function(args) {

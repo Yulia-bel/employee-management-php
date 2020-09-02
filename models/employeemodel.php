@@ -38,6 +38,17 @@ class employeeModel extends Model {
         $stmt = $conn->prepare("DELETE FROM employees WHERE id=". $id);
         $stmt->execute();
     }
+
+    public function getById($param = null) {
+        $id = $param[0];
+        $conn = $this->db->connect();
+        $stmt = $conn->prepare("SELECT * FROM employees WHERE id=". $id . " LIMIT 1");
+        
+        if ($stmt->execute() && $stmt->rowCount()) {
+            $result = $stmt->fetch(PDO::FETCH_OBJ);
+            return $result;
+        };
+    }
 }
 
 /*function addEmployee(array $newEmployee)

@@ -4,16 +4,21 @@ class Employee extends Controller {
     
     function __construct(){
         parent::__construct();
-        $this->view->render('dashboard');
-       // $this->view->employees = [];
+        $this->view->employees = [];
         //echo "employee controller";
     }
 
     public function show() {
-        //echo "<br> show method";
+        $employees = $this->model->get();
+        $this->view->employees = $employees;
+        $this->view->render('dashboard');
     }
 
+    public function insert() {
+        $newEmployee = $_POST['newEmployee'];
+        $this->model->insertEmployee($newEmployee);
 
+    }
 }
 
 

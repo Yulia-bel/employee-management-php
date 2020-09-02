@@ -34,7 +34,7 @@ class App
 
           // creating object from controller file to load the necesarry Model
           $controller = new $url[0];
-          //$controller->loadModel($url[0]);
+          $controller->loadModel($url[0]);
           
           // checking for other parameters in url array
           $numberOfparam = sizeof($url);

@@ -3,9 +3,9 @@
 define('URL', 'http://localhost/php-employee-management-v4/');
 
 define('HOST', 'localhost');
-define('DB', 'mvc');
+define('DB', 'employees');
 define('USER', 'root');
-define('PASSWORD', "123!\"·QWE");
+define('PASSWORD', "");
 define('CHARSET', 'utf8mb4');
 
 ?>

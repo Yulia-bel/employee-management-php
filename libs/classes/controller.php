@@ -8,7 +8,7 @@ class Controller{
 
     }
 
-    /*function loadModel($model){
+    function loadModel($model){
         $url = 'models/'.$model.'model.php';
 
         if(file_exists($url)){
@@ -17,7 +17,7 @@ class Controller{
             $modelName = $model.'Model';
             $this->model = new $modelName();
         }
-    }*/
+    }
 }
 
 ?>

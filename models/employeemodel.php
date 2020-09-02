@@ -1,6 +1,42 @@
 <?php
 
-function addEmployee(array $newEmployee)
+class employeeModel extends Model {
+    public function __construct() {
+        parent::__construct();
+    }
+
+    public function get() {
+
+        $conn = $this->db->connect();
+        $stmt = $conn->prepare("SELECT * FROM employees");
+        $stmt->execute();
+
+        $employees = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return json_encode($employees);
+    }
+
+    public function insertEmployee($employee) {
+
+        $conn = $this->db->connect();
+
+        $stmt = $conn->prepare("INSERT INTO employees (name,email,age,city,phoneNumber,postalCode,state,streetAddress) VALUES ('" . $employee['name'] . "', '" . $employee['email'] . "', " . $employee['age'] . ", '" . $employee['city'] . "',  '" . $employee['phoneNumber'] ."', " .  $employee['postalCode'] .", '" . $employee['state'] . "', '" . $employee['streetAddress'] . "')");
+        
+        if ($stmt->execute()) {
+            $stmt = $conn->prepare("SELECT * FROM employees WHERE name='". $employee['name'] ."' AND email='" .$employee['email'] ."' LIMIT 1 " );
+            $stmt->execute();
+
+            if($stmt->rowCount()) {
+                $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+                echo json_encode($result);
+            }
+        }
+    }
+
+    
+}
+
+/*function addEmployee(array $newEmployee)
 {
     $employees = readEmployees();
     $newEmployee['employee_ID'] = getNextIdentifier($employees);
@@ -99,4 +135,4 @@ function SQLConnect()
     $dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE;
     $pdo = new PDO($dsn, USER, PASSWORD);
     return $pdo;
-}
+}*/

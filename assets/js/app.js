@@ -21,7 +21,7 @@ $(document).ready(function () {
         insertItem: function (newEmployee) {
           return $.ajax({
             type: "POST",
-            url: "insert",
+            url: "http://localhost/php-employee-management-v4/employee/insert",
             dataFilter: function(response) {
                return JSON.parse(response)
               },

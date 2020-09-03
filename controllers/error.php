@@ -1,7 +1,7 @@
 <?php
 
-class Errorr extends Controller {
-  function __construct() {
-    
+class Errors extends Controller {
+    function __construct() {
   }
+
 }

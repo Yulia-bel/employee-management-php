@@ -61,7 +61,7 @@ class App
               //print_r($controller);
           }
       }else{
-          $controller = new Errorr();
+          $controller = new Errors();
       }
   }
 }

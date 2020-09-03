@@ -17,18 +17,20 @@ class LoginModel extends Model {
        if ($stmt->rowCount()) {
           $result = $stmt->fetch(PDO::FETCH_OBJ);
           if (password_verify($password, $result->password)) {
-             $_SESSION['logged'] = true;
+             /*$_SESSION['logged'] = true;
              $_SESSION['userId'] = $user->userId;
              $_SESSION['username'] = $user->name;
              $_SESSION['email'] = $user->email;
-             $_SESSION['logTime'] = time();
-             return true;
+             $_SESSION['logTime'] = time();*/
+             echo "true";
           } else {
-             $_SESSION['wrong-pwd'] = true;
-             if (isset($_SESSION['wrong-email'])) unset($_SESSION['wrong-email']);
-             return false;
+             /*$_SESSION['wrong-pwd'] = true;
+             if (isset($_SESSION['wrong-email'])) unset($_SESSION['wrong-email']);*/
+             echo "false";
           }
-       } 
+       } else {
+          echo "notfound";
+       }
 
   }
 

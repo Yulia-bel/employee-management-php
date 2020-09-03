@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Employee Managment</title>
   <!-- OWN STYLE -->
-  <link href="assets/css/login.css" rel="stylesheet">
-  <link href="assets/css/main.css" rel="stylesheet">
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <link href="<?php echo constant('URL'); ?>assets/css/login.css" rel="stylesheet">
+  <link href="<?php echo constant('URL'); ?>assets/css/main.css" rel="stylesheet">
+  <script src='<?php echo constant('URL'); ?>https://kit.fontawesome.com/a076d05399.js'></script>
 
   <!-- DEPENDENCIES - JQUERY AND BOOTSTRAP-->
-  <script src="node_modules/jquery/dist/jquery.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-  <script src="assets/js/login.js"></script>
+  <script src="<?php echo constant('URL'); ?>node_modules/jquery/dist/jquery.js"></script>
+  <script src="<?php echo constant('URL'); ?>node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <link href="<?php echo constant('URL'); ?>node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <script src="<?php echo constant('URL'); ?>assets/js/login.js"></script>
 </head>
 
 
@@ -29,10 +29,10 @@
             <div class="card-body">
               <h5 class="card-title text-center mb-5">Sign In</h5>
 
-              <form class="form-signin" method="POST" action="login/logIn">
+              <form class="form-signin">
 
                 <div class="form-label-group">
-                  <input type="text" id="inputName" name="email" class="form-control mb-3" placeholder="Username" required autofocus>
+                  <input type="text" id="inputEmail" name="email" class="form-control mb-3" placeholder="Email" required autofocus>
                 </div>
 
                 <div class="form-label-group">
@@ -43,9 +43,10 @@
 
                 </div>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">Sign in</button>
+                <input class="btn btn-lg btn-primary btn-block" type="button" id="login" value="Sign In">
 
               </form>
+              
             </div>
           </div>
         </div>
@@ -53,7 +54,9 @@
     </div>
     <?php include 'assets/footer.html'; ?>
   </div>
-  <script type="text/javascript" src="node_modules/jsgrid/dist/jsgrid.min.js"></script>
+
+  <script src="<?php echo constant('URL'); ?>assets/js/login.js"></script>
+ 
 
 </body>
 

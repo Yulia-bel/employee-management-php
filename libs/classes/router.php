@@ -25,6 +25,11 @@ class App
         $url[0] = 'employee';
         $url[1] = 'show';
       }
+
+      if((empty($url[0]) || $url[0] != 'login') && SessionHelper::checkSession() && SessionHelper::sessionExpired()) {
+        $url[0] = 'login';
+        $url[1] = 'enter';
+    } 
       // in case controller is not defined
       
 

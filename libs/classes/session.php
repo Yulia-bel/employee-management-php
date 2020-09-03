@@ -6,9 +6,8 @@ abstract class SessionHelper {
     return isset($_SESSION['log']) ? true : false;
   }
 
-  static function checkSessionTime () {
-
+  static function sessionExpired () {
+    return (time() - $_SESSION['start'] > 600) ? true : false;
   }
-
 
 }

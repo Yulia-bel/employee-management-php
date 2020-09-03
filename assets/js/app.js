@@ -47,24 +47,8 @@ $(document).ready(function () {
         }
       },
       rowDoubleClick: function (row) {
-        window.location.href = `details/${row.item.id}`
+        window.location.href = `http://localhost/php-employee-management-v4/employee/details/${row.item.id}`
       },
-
-      /*onItemInserting: function(args) {
-        if(args.item.id === undefined) {
-          $.ajax({
-            url: "controllers/employeeController.php",
-            method: "POST",
-            data: {
-              action: "getId"
-            },
-            success: function(data) {
-              console.log(data)
-              args.item.id = data
-            }
-          })
-        }
-      },*/
 
       data: employees,
 

@@ -6,7 +6,7 @@ class Login extends Controller {
     }
 
   public function enter() {
-    session_unset();
+
     $this->view->render('login/login');
   }
 
@@ -27,6 +27,11 @@ class Login extends Controller {
       echo "notfound";
     }
   }  
+
+  public function logout() {
+    session_unset();
+    $this->view->render('login/login');
+  }
 }
 
 

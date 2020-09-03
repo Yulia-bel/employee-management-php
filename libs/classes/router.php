@@ -21,7 +21,7 @@ class App
             $url[1] = 'enter';
         } 
 
-      if($url[0] == 'login'&& SessionHelper::checkSession())  {
+     if($url[0] == 'login' && $url[1] != 'logout' && SessionHelper::checkSession())  {
         $url[0] = 'employee';
         $url[1] = 'show';
       }

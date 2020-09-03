@@ -16,7 +16,7 @@
             </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
-            <button type="button" class="btn btn-warning" id="logout"><a href="<?php echo constant('URL'); ?>login/enter">Log out</a></button>
+            <button type="button" class="btn btn-warning" id="logout"><a href="<?php echo constant('URL'); ?>login/logout">Log out</a></button>
         </div>
     </div>
 </nav>

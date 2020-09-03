@@ -6,16 +6,27 @@ class Login extends Controller {
     }
 
   public function enter() {
+    session_unset();
     $this->view->render('login/login');
   }
 
-  public function logIn() {
+  public function validate() {
 
-    $result = $this->model->checkUser($_POST["email"], $_POST["password"]);
+    $user = $this->model->checkUser($_POST["email"]);
 
-    echo $result;
-  }
-  
+    if($user) {
+      if(password_verify($_POST['password'], $user->password)) {
+        $_SESSION['log'] = true;
+        $_SESSION['user'] = $user->id;
+        $_SESSION['start'] = time();
+        echo "true";     
+      } else {
+        echo "false";
+      }
+    } else {
+      echo "notfound";
+    }
+  }  
 }
 
 

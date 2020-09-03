@@ -9,7 +9,7 @@ class Employee extends Controller {
     }
 
     public function show() {
-        $employees = $this->model->get();
+        $employees = $this->model->getEmployee();
         $this->view->employees = $employees;
         $this->view->render('dashboard');
     }

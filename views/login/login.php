@@ -46,7 +46,6 @@
                 <input class="btn btn-lg btn-primary btn-block" type="button" id="login" value="Sign In">
 
               </form>
-              
             </div>
           </div>
         </div>

@@ -6,9 +6,8 @@ class LoginModel extends Model {
     parent::__construct();
   }
 
-  public function checkUser($email, $password)
+  public function checkUser($email)
   {
-
        $conn = $this->db->connect();;
        $query = "SELECT * FROM user WHERE email='$email' LIMIT 1;";
        $stmt = $conn->prepare($query);
@@ -16,24 +15,11 @@ class LoginModel extends Model {
     
        if ($stmt->rowCount()) {
           $result = $stmt->fetch(PDO::FETCH_OBJ);
-          if (password_verify($password, $result->password)) {
-             /*$_SESSION['logged'] = true;
-             $_SESSION['userId'] = $user->userId;
-             $_SESSION['username'] = $user->name;
-             $_SESSION['email'] = $user->email;
-             $_SESSION['logTime'] = time();*/
-             echo "true";
-          } else {
-             /*$_SESSION['wrong-pwd'] = true;
-             if (isset($_SESSION['wrong-email'])) unset($_SESSION['wrong-email']);*/
-             echo "false";
-          }
+          return $result;
        } else {
-          echo "notfound";
-       }
-
+          return false;
+     }
   }
-
 }
 
 

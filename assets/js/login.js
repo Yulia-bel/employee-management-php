@@ -6,7 +6,7 @@ $("#login").click(function() {
 
   $.ajax({
     type: 'post',
-    url: 'http://localhost/php-employee-management-v4/login/logIn',
+    url: 'http://localhost/php-employee-management-v4/login/validate',
     data: {
        email: email,
        password: password
@@ -16,10 +16,10 @@ $("#login").click(function() {
       window.location.href = 'http://localhost/php-employee-management-v4/employee/show';
     } else if (response.includes('false')) {
       $('#error_message').removeClass("invisible");
-      $('#error_message').append("<p>Wrong Password</p>");
+      $('#error_message').append("<p class='login_error'>Wrong Password</p>");
     } else {
       $('#error_message').removeClass("invisible");
-      $('#error_message').append("<p>Email not found</p>");
+      $('#error_message').append("<p class='login_error'>Email not found</p>");
     }
  })
 })

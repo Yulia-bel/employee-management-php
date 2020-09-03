@@ -5,7 +5,7 @@ class EmployeeModel extends Model {
         parent::__construct();
     }
 
-    public function get() {
+    public function getEmployee() {
 
         $conn = $this->db->connect();
         $stmt = $conn->prepare("SELECT * FROM employees");

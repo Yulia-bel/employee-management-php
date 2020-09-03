@@ -66,11 +66,10 @@ class App
                   //print_r($url[1]);
               }
           }else{
-              //$controller->render();
-              //print_r($controller);
+              header("Location: " . constant('URL') . "login/enter");
           }
       }else{
-        
+        header("Location: " . constant('URL') . "login/enter");
       }
   }
 }

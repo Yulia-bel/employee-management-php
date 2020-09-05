@@ -23,6 +23,7 @@ class Database{
             $connection = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                
             ];
             
             $pdo = new PDO($connection, $this->user, $this->password, $options);
@@ -30,7 +31,7 @@ class Database{
             if ($pdo && $pdo->query("USE employees")) {
                 return $pdo;
              } else 
-             if ($conn && !$conn->query("USE employees")) {
+             if ($conn && !$conn->query("USE employeesv")) {
                 $query = file_get_contents("config/db.sql");
                 $pdo->exec($query);
                 return $pdo;
@@ -40,6 +41,7 @@ class Database{
             print_r('Error connection: ' . $e->getMessage());
         }
     }
+
 }
 
 ?>

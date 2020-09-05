@@ -28,7 +28,7 @@ class App
 
       if((empty($url[0]) || $url[0] != 'login') && SessionHelper::checkSession() && SessionHelper::sessionExpired()) {
         $url[0] = 'login';
-        $url[1] = 'enter';
+        $url[1] = 'logout';
     } 
       // in case controller is not defined
       

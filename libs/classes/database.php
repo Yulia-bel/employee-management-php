@@ -23,17 +23,23 @@ class Database{
             $connection = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_EMULATE_PREPARES   => false,
             ];
             
             $pdo = new PDO($connection, $this->user, $this->password, $options);
-    
-            return $pdo;
+
+            if ($pdo && $pdo->query("USE employees")) {
+                return $pdo;
+             } else 
+             if ($conn && !$conn->query("USE employees")) {
+                $query = file_get_contents("config/db.sql");
+                $pdo->exec($query);
+                return $pdo;
+             } else {
+             }
         }catch(PDOException $e){
             print_r('Error connection: ' . $e->getMessage());
         }
     }
-
 }
 
 ?>

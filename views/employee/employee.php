@@ -12,7 +12,7 @@
 <body>
     <div class="main d-flex flex-column justify-content-between">
 
-        <?php include('assets/header.php') ?>
+        <?php include('assets/html/header.php') ?>
 
         <div class='main__content d-flex justify-content-center align-items-center flex-column'>
             <div id="formErrMsg" class="d-none errorMsg mb-4 align-items-center justify-content-center alert">
@@ -91,7 +91,7 @@
                 </div>
             </form>
         </div>
-        <?php include('assets/footer.html') ?>
+        <?php include('assets/html/footer.html') ?>
     </div>
     <script src="<?php echo constant('URL'); ?>node_modules/jquery/dist/jquery.js"></script>
     <script src="<?php echo constant('URL'); ?>https://kit.fontawesome.com/de217cab6a.js" crossorigin="anonymous"></script>

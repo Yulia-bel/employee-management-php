@@ -20,7 +20,7 @@
 
 <body>
 <div class="general-container d-flex flex-column justify-content-between">
-    <?php include "assets/loginheader.html"; ?>
+    <?php include "assets/html/loginheader.html"; ?>
 
     <div class="container">
       <div class="row">
@@ -51,7 +51,7 @@
         </div>
       </div>
     </div>
-    <?php include 'assets/footer.html'; ?>
+    <?php include 'assets/html/footer.html'; ?>
   </div>
 
   <script src="<?php echo constant('URL'); ?>assets/js/login.js"></script>

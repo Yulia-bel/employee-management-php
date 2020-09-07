@@ -75,6 +75,10 @@ Key points of the functionality remail the same:
 ├── viewsREADME.md
 └── UML.drawio
 
+
+OOP and MVC interaction on the example of employee/details/1 in url - calling method details with parameter of the Employee class:
+
+![example schema]  (https://docs.google.com/drawings/d/e/2PACX-1vQdZDHouFKzhukN86rmOg0EeHEk6S6mZSld_ShUwbK0Fww4p4rp5-HQJaJ-69nQ-cb3ClEjZv7ag4cT/pub?w=1759&h=1088)
 ``` 
 
 ## External libraries  

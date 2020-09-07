@@ -75,11 +75,12 @@ Key points of the functionality remail the same:
 ├── viewsREADME.md
 └── UML.drawio
 
+``` 
 
 OOP and MVC interaction on the example of employee/details/1 in url calling method details with parameter of the Employee class:
 
 ![example](assets/img/example.png) 
-``` 
+
 
 ## External libraries  
   

@@ -78,7 +78,7 @@ Key points of the functionality remail the same:
 
 OOP and MVC interaction on the example of employee/details/1 in url - calling method details with parameter of the Employee class:
 
-![example schema]  (/assets/img/example.png)
+![example schema]  (assets/img/example.png)
 ``` 
 
 ## External libraries  

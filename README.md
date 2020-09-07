@@ -21,6 +21,8 @@ Key points of the functionality remail the same:
   
 ## Folder structure
 
+``` 
+
 ├── assets
 │   ├── css
 │   │   ├── login.css
@@ -72,6 +74,8 @@ Key points of the functionality remail the same:
 ├── package-lock.json
 ├── viewsREADME.md
 └── UML.drawio
+
+``` 
 
 ## External libraries  
   

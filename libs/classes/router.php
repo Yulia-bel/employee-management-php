@@ -28,10 +28,6 @@ class App
         $url[0] = 'login';
         $url[1] = 'logout';
     } 
-      // in case controller is not defined
-      
-
-      // if controller is defined in url we require the file from Controllers folder
 
       $controllerFile = 'controllers/' . $url[0] . '.php';
 

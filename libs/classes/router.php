@@ -9,8 +9,6 @@ class App
 
     // getting url and transorming it to array though "/" division
 
-    
-
       $url = isset($_GET['url']) ? $_GET['url']: null;
       $url = rtrim($url, '/');
       $url = explode('/', $url);

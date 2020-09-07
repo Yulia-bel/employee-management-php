@@ -5,7 +5,6 @@ class Controller{
     function __construct(){
         //echo "<p>Base controller class</p>";
         $this->view = new View();
-
     }
 
     function loadModel($model){

@@ -31,7 +31,7 @@ class Database{
             if ($pdo && $pdo->query("USE employees")) {
                 return $pdo;
              } else 
-             if ($conn && !$conn->query("USE employeesv")) {
+             if ($conn && !$conn->query("USE employees")) {
                 $query = file_get_contents("config/db.sql");
                 $pdo->exec($query);
                 return $pdo;

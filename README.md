@@ -1,8 +1,13 @@
 
-# PHP BASIC APPLICATION TO MANAGE AN EMPLOYEES LIST  
+# PHP EMPLOYEE MANAGEMENT VERSION 4  
   
   
-## Application main points  
+## Project overview
+
+The following project represents the final step of the development of a simple employee management service, which allows user (admin) to see the list of employees with the detailed information, remove, update and create employees. 
+At this final stage the project has been refactored in accordance with the Object Oriented Programming paradigm. Procedural functions within controller and model folders has been replaced with classes and methods (extending the basic classes located in folder 'libs/classes'), managed by the router class App which is interpretening the introduced url.
+
+Key points of the functionality remail the same:
   
 1. Login and logout with a SQL Database as user storage  
 2. Controlled user session set to 10 minutes  
@@ -14,117 +19,60 @@
 8. Employee avatar through web service images  
   
   
-### Folder organization 
-This file structure has been distributed according to the MVC model (Model-View-Controller) and the structure its as follows:
-  
--php-employee-management-v3 - The project folder that contains:
+## Folder structure
 
- - _assets/_: Folder that contains css, js and html reusable code
- - _config/_: Here we define the constants
- - _controllers/_:  Contains the different controllers
- - _libs/_:  Contains the different helper functions
- - _models/_: Contains the different Models/Managers
- - _node\_modules/_: Folder ignored by git that contains the installation of npm dependencies
- - _resources/_: Contains the database code used to create the SQL database and the deprecated json files
- - _views/_:  Contains the different .php views files
- - _.gitignore_: File that tells **GIT** which files to ignore
- - _index.php_: Entry point of the application
- - _package.json_: File describing the project with its dependencies
- - _package-lock.json_: File listing the installed dependencies
- - _README.md_: This file
- - _UML.drawio_: Database SQL UML diagram
+├── assets
+│   ├── css
+│   │   ├── login.css
+│   │   └── main.css
+│   ├── html
+│   │   ├── footer.html
+│   │   ├── head.php
+│   │   ├── header.php       
+│   │   └── loginheader.php
+│   ├── img
+│   └── js
+│       ├── app.js
+│       ├── login.js   
+│       └── utils.js
+├── config
+│   ├── config.php
+│   ├── constants.php
+│   └── db.sql
+├── controllers
+│   ├── avatars.php
+│   ├── employee.php
+│   ├── error.php.
+│   └── login.php
+├── libs
+│   └── classes
+│       ├── controller.php
+│       ├── database.php
+│       ├── router.php
+│       ├── session.php
+│       └── view.php
+├── models
+│   ├── avatarmodel.php
+│   ├── employeemodel.php
+│   └── loginmodel.php
+├── nodemodules
+├── views
+│   ├── employee
+│   |    ├── employee.php
+│   |    └── imageGallery.php
+│   ├── errors
+│   |    └── errors.php
+│   ├── login
+│   |    └── login.php
+│   └── dashboard.php
+├── .gitignore
+├── .htaccess
+├── index.php
+├── package.json
+├── package-lock.json
+├── viewsREADME.md
+└── UML.drawio
 
-
-  
-We use some naming conventions when create code files. For instance a file which handles HTTP request we name it as `Controller`.  
-  
-In the other hand we have also the concept of `Manager` which typically implements an abstraction layer over a storage system.
-
-A file called `Model` implements a database layer is a file which interacts directly with a Database. **On future projects we will refactor this project to add Models and much more!!**
-
-We also added the concept of `Helper` which is a class which its finality is to help `Controllers` and `Managers` to be lighter and to keep single responsibility.  
-
-The **sessionHelper** file needs to be added to each page we visit in order to check if the user session has expired and if so to call the methods of the loginManager to logout the admin user.
-
-To manage de SQL database, we created 3 files:
- - _database.php_: in this file we handle the calls to the database to retrieve the employees
- - _DB_manager.php_: This files includes all the functions that handle the SQL and are being called from **database.php**
- - _db.php_: In this file we define the constants for the database handling and we initialize the DB.
-
-
-### Including or importing code files to current file
-
-As you have seen in JS there are sentences to import code from other files to the current file we are working. In PHP happens the same thing. And as we want to encapsulate code by concepts( the login page request are managed by a loginController and so on) it is required to import files.
-
-So for instance a dashboard.php page can look like this at the beginning of the file:
-```
- <?php  
-include "./library/sessionHelper.php";  // we added the code of the helper to check session
-  
-include "../assets/header.html"; // the header file that we also include it on every page
-?>
-<div id="alert" class="alert alert-danger w-25 mx-auto text-center" data-dismiss="alert" aria-label="Close" role="alert"></div>  
-<div id="employeesGrid" class="ml-5"></div>  
-<script>
-..............
-```
-
-So when the server returns the processed file, PHP has changed all `include` sentences by the code that is on that files.
-Let's make it clearer. Let's say that we have a sessionHelper which has this code.
-```
-session_start();  
-if(isset($_SESSION['userId'])) {  
-    if(time() - $_SESSION['time'] > $_SESSION['lifeTime']) {  
-        logout();  
-		.... 
-  }  
-} else {  
-	.....
-}
-```
-And we want to include it on every page user visits in order to check if his session is still valid. We just need to do this to include it for instance on `dashboard.php` file.
-
-```
-<?php include "./library/sessionHelper.php";?>
-
-<div id="alert" class="alert alert-danger w-25 mx-auto text-center" data-dismiss="alert" aria-label="Close" role="alert"></div>  
-..............
-```
-So what we have done is to include literally that `if else` of the helper at the top of the `dashboard.php` file. We can do this with all files we need.
-
-  
-### Project key points  
-  
-The user is stored in the table **users** inside the DB **employee_management**.
-  
-The employees are stored in the table **employees** inside the DB **employee_management**.
-  
-  
-  
-You should follow with coherence the project structure we give you and when you add files or functions make them self-descriptive. As you could see in the methodology we left on the project.
-  
-````  
-$data = getAllData($id); // get employee data  
-$employee = getEmployee($id);// just reading we know that gets employee by id, cool! and clean!  
-````  
-  
-The functions you create have to be coherent, the naming is a serious affair. You can write in such a way that everything describes itself.  
-  
-Same thing for variables, it is really important to give proper names.  
-  
-````  
-$data = "John";  
-$name = 'John;// no words needed  
-````  
-  
-
-And yeah! also same thing for every file you create give sense and coherence to it.  
-  
-
-[About naming](https://dzone.com/articles/naming-conventions-from-uncle-bobs-clean-code-phil)  
-  
-
-  
 ## External libraries  
   
 All them must be installed with the npm here you have a package.json take a look please.  
@@ -263,5 +211,10 @@ $decodedResponse = json_decode($apiResponse);
 
 
 ## Authors ✒️
+- **Yulia Belyakova & Iman Aazibou** - _All the work of design and code_ - [Repository](https://code.assemblerschool.com/yulia-belyakova/php-employee-management-v4)
 
+previous step:
 - **Jaime Botet & Alejandro Palomes** - _All the work of design and code_ - [Repository](https://code.assemblerschool.com/jaime-botet/php-employee-management-v3)
+
+legacy code used, including employee form validaions by Ezequiel  (assets/js/utils.js):
+- **Ezequiel Garay & Yulia Belyakova** - _All the work of design and code_ - [Repository](https://code.assemblerschool.com/yulia-belyakova/php-employee-management-v3)

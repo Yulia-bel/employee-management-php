@@ -220,10 +220,8 @@ $decodedResponse = json_decode($apiResponse);
 
 
 ## Authors ✒️
-- **Yulia Belyakova & Iman Aazibou** - _All the work of design and code_ - [Repository](https://code.assemblerschool.com/yulia-belyakova/php-employee-management-v4)
+- **Yulia Belyakova & Iman Aazibou** 
 
-previous step:
-- **Jaime Botet & Alejandro Palomes** - _All the work of design and code_ - [Repository](https://code.assemblerschool.com/jaime-botet/php-employee-management-v3)
 
 legacy code used, including employee form validaions by Ezequiel  (assets/js/utils.js):
-- **Ezequiel Garay & Yulia Belyakova** - _All the work of design and code_ - [Repository](https://code.assemblerschool.com/yulia-belyakova/php-employee-management-v3)
+- **Ezequiel Garay & Yulia Belyakova** 
